@@ -30,10 +30,17 @@ public class ArrowHandler {
 		} else
 		if(arrow.material == EnumBowMaterial.ZOMBIE){
 			if(event.getEntity() instanceof Zombie){
-				Zombie zombie = (Zombie)event.getEntity();
-				zombie.getWorld().spawnCreature(zombie.getLocation(), CreatureType.GIANT);
-				zombie.remove();
-			}
+					Zombie zombie = (Zombie)event.getEntity();
+					Giant giant = (Giant)zombie.getWorld().spawnCreature(zombie.getLocation(), CreatureType.GIANT);
+					giant.setHealth(zombie.getHealth());
+					zombie.remove();
+				} else
+				if(event.getEntity() instanceof Giant){
+					Giant giant = (Giant)event.getEntity();
+					Zombie zombie = (Zombie)giant.getWorld().spawnCreature(giant.getLocation(), CreatureType.ZOMBIE);
+					zombie.setHealth(giant.getHealth());
+					giant.remove();
+				}
 		}
 	}
 }
