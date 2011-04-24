@@ -1,6 +1,6 @@
 package TechGuard.Archers.Arrow;
 /**
- * @author ´TechGuard
+ * @author ï¿½TechGuard
  */
 public enum EnumBowMaterial{
 	STANDARD("Normal", 4),
@@ -8,7 +8,8 @@ public enum EnumBowMaterial{
 	FIRE("Fire", 5),
 	TNT("TNT", 0),
 	THUNDER("Thunder", 0),
-	SKELTION("Skeltion",0);
+	SKELTION("Skeltion",0),
+        THRICE("Thrice", 3);
 	
 	private String name;
 	private short data;
