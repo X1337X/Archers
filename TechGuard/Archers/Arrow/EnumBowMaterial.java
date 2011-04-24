@@ -8,9 +8,9 @@ public enum EnumBowMaterial{
 	FIRE("Fire", 5),
 	TNT("TNT", 0),
 	THUNDER("Thunder", 0),
-	SKELTION("Skeltion",0),
+	MONSTER("Monster", 0),//Why? It will spawn a random monster, not only a skeleton
         THRICE("Thrice", 3),
-        ZOMBIE("Zombie",0);
+        ZOMBIE("Zombie", 0);
 	
 	private String name;
 	private short data;
