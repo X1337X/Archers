@@ -29,6 +29,28 @@ public class Arrow extends EntityArrow{
 		this.material = material;
 	}
 
+        public Arrow(World w, LivingEntity el, EnumBowMaterial material, int thrice) {
+		super(((CraftWorld)w).getHandle());
+		this.material = material;
+		EntityLiving entityliving = ((CraftLivingEntity)el).getHandle();
+		
+	    this.shooter = entityliving;
+	    b(0.5F, 0.5F);
+	    int int0 = 0;
+	    if(thrice==0) int0 = -10;
+	    if(thrice==1) int0 = 10;
+	    setPositionRotation(entityliving.locX, entityliving.locY + entityliving.s(), entityliving.locZ, entityliving.yaw+int0, entityliving.pitch);
+	    this.locX -= MathHelper.cos(this.yaw / 180.0F * 3.141593F) * 0.16F;
+	    this.locY -= 0.1000000014901161D;
+	    this.locZ -= MathHelper.sin(this.yaw / 180.0F * 3.141593F) * 0.16F;
+	    setPosition(this.locX, this.locY, this.locZ);
+	    this.height = 0.0F;
+	    this.motX = (-MathHelper.sin(this.yaw / 180.0F * 3.141593F) * MathHelper.cos(this.pitch / 180.0F * 3.141593F));
+	    this.motZ = (MathHelper.cos(this.yaw / 180.0F * 3.141593F) * MathHelper.cos(this.pitch / 180.0F * 3.141593F));
+	    this.motY = (-MathHelper.sin(this.pitch / 180.0F * 3.141593F));
+	    a(this.motX, this.motY, this.motZ, 1.5F, 1.0F);
+	}
+
 	public void p_() {
 		super.p_();
 	    
