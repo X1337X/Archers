@@ -26,7 +26,7 @@ public class pListener extends PlayerListener{
 		}
 		
 		if(item.getType() == Material.BOW){
-			p.sendMessage("�2Bow Material: �e"+EnumBowMaterial.fromData(item.getDurability()).getName());
+			p.sendMessage(ChatColor.DARK_GREEN+"Bow Material: "+ChatColor.YELLOW+EnumBowMaterial.fromData(item.getDurability()).getName());
 		}
 	}
 	
@@ -68,7 +68,7 @@ public class pListener extends PlayerListener{
 						return;
 					}
 					item.setDurability(bm.getDataValue());
-					p.sendMessage("�2Changed Bow Material to �e"+bm.getName()+"�2.");
+					p.sendMessage(ChatColor.DARK_GREEN+"Changed Bow Material to "+ChatColor.YELLOW+bm.getName()+ChatColor.DARK_GREEN+".");
 				}
 			}
 		}
@@ -100,8 +100,10 @@ public class pListener extends PlayerListener{
 						}
 					}
 				}
-				if(has != Properties.ArrowAmmo.get(material.getDataValue()).size())
+				if(has != Properties.ArrowAmmo.get(material.getDataValue()).size()){
+					p.sendMessage(ChatColor.RED+"You don't have enough ammo!");
 					return;
+				}
 				
 				Arrow arrow = new Arrow(p.getWorld(), p, material);
 				ArrowHandler.onArrowCreate(p, arrow);
