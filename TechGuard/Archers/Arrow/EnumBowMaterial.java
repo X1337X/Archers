@@ -9,7 +9,8 @@ public enum EnumBowMaterial{
 	TNT("TNT", 0),
 	THUNDER("Thunder", 0),
 	SKELTION("Skeltion",0),
-        THRICE("Thrice", 3);
+        THRICE("Thrice", 3),
+        ZOMBIE("Zombie",0);
 	
 	private String name;
 	private short data;
