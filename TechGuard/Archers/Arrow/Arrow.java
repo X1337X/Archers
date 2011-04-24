@@ -18,7 +18,7 @@ import org.bukkit.entity.CreatureType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 /**
- * @author ´TechGuard
+ * @author TechGuard
  */
 public class Arrow extends EntityArrow{
 	public EnumBowMaterial material;
@@ -96,6 +96,11 @@ public class Arrow extends EntityArrow{
 		else if(material == EnumBowMaterial.SKELTION){
 			World world = getBukkitEntity().getWorld();
 			CreatureType s = CreatureType.SKELETON;
+			world.spawnCreature(getBukkitEntity().getLocation(), s);
+		}
+                else if(material == EnumBowMaterial.ZOMBIE){
+			World world = getBukkitEntity().getWorld();
+			CreatureType s = CreatureType.ZOMBIE;
 			world.spawnCreature(getBukkitEntity().getLocation(), s);
 		}
 	}
