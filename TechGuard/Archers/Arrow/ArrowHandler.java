@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByProjectileEvent;
 import org.bukkit.craftbukkit.entity.CraftArrow;
 /**
- * @author ´TechGuard
+ * @author ï¿½TechGuard
  */
 public class ArrowHandler {
 	public static short lastData = 0;
@@ -27,6 +27,13 @@ public class ArrowHandler {
 		
 		if(arrow.material == EnumBowMaterial.FIRE){
 			event.getEntity().setFireTicks(80);
+		} else
+		if(arrow.material == EnumBowMaterial.ZOMBIE){
+			if(event.getEntity() instanceof Zombie){
+				Zombie zombie = (Zombie)event.getEntity();
+				zombie.getWorld().spawnCreature(zombie.getLocation(), CreatureType.GIANT);
+				zombie.remove();
+			}
 		}
 	}
 }
