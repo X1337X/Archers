@@ -92,16 +92,14 @@ public class Arrow extends EntityArrow{
 		if(material == EnumBowMaterial.THUNDER){
 			World world = getBukkitEntity().getWorld();
 			world.strikeLightning(new Location(world, locX, locY, locZ));
-		}
-		else if(material == EnumBowMaterial.SKELTION){
+		}else
+                if(material == EnumBowMaterial.MONSTER){
 			World world = getBukkitEntity().getWorld();
-			CreatureType s = CreatureType.SKELETON;
-			world.spawnCreature(getBukkitEntity().getLocation(), s);
+			CreatureType[] types = { CreatureType.CREEPER, CreatureType.SKELETON, CreatureType.SLIME, CreatureType.SPIDER, CreatureType.ZOMBIE };
+			world.spawnCreature(getBukkitEntity().getLocation(), types[(new Random()).nextInt(5)]);
 		}
-                else if(material == EnumBowMaterial.ZOMBIE){
-			World world = getBukkitEntity().getWorld();
-			CreatureType s = CreatureType.ZOMBIE;
-			world.spawnCreature(getBukkitEntity().getLocation(), s);
+        else if(material == EnumBowMaterial.THRICE){
+			die();
 		}
 	}
 	
