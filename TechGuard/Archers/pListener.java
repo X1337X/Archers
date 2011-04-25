@@ -108,17 +108,17 @@ public class pListener extends PlayerListener{
 					return;
 				}
 				
-                                if(material == EnumBowMaterial.THRICE){
-                                     for(int i = 0; i <= 2; i++){
-				          Arrow arrow = new Arrow(p.getWorld(), p, EnumBowMaterial.THRICE, i);
-				          ArrowHandler.onArrowCreate(p, arrow);
-                                     }
-				     Arrow arrow = new Arrow(p.getWorld(), p, material);
-				     ArrowHandler.onArrowCreate(p, arrow);
-                                } else {
-				     Arrow arrow = new Arrow(p.getWorld(), p, material);
-				     ArrowHandler.onArrowCreate(p, arrow);
-                                }
+				if(material == EnumBowMaterial.THRICE){
+                    for(int i = 0; i <= 2; i++){
+				        Arrow arrow = new Arrow(p.getWorld(), p, EnumBowMaterial.THRICE, i);
+				        ArrowHandler.onArrowCreate(p, arrow);
+                    }
+					Arrow arrow = new Arrow(p.getWorld(), p, EnumBowMaterial.STANDARD);
+					ArrowHandler.onArrowCreate(p, arrow);
+				} else {
+					Arrow arrow = new Arrow(p.getWorld(), p, material);
+					ArrowHandler.onArrowCreate(p, arrow);
+				}
 				
 				for(ItemStack stack : Properties.ArrowAmmo.get(material.getDataValue())){
 					CraftUpdate.removeItem(p, stack);
