@@ -4,13 +4,15 @@ import java.util.Random;
 
 import net.minecraft.server.EntityArrow;
 import net.minecraft.server.EntityHuman;
-import net.minecraft.server.EntitySkeleton;
+import net.minecraft.server.EntityLiving;
 import net.minecraft.server.EntityTNTPrimed;
 import net.minecraft.server.Item;
 import net.minecraft.server.ItemStack;
+import net.minecraft.server.MathHelper;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.TreeType;
 import org.bukkit.World;
 import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.craftbukkit.entity.CraftLivingEntity;
@@ -23,7 +25,7 @@ import org.bukkit.util.Vector;
 public class Arrow extends EntityArrow{
 	public EnumBowMaterial material;
 	private int moving = 0;
-	
+
 	public Arrow(World world, LivingEntity entityliving, EnumBowMaterial material) {
 		super(((CraftWorld)world).getHandle(), ((CraftLivingEntity)entityliving).getHandle());	
 		this.material = material;
@@ -33,7 +35,7 @@ public class Arrow extends EntityArrow{
 		super(((CraftWorld)w).getHandle());
 		this.material = material;
 		EntityLiving entityliving = ((CraftLivingEntity)el).getHandle();
-		
+
 	    this.shooter = entityliving;
 	    b(0.5F, 0.5F);
 	    int int0 = 0;
@@ -53,7 +55,7 @@ public class Arrow extends EntityArrow{
 
 	public void p_() {
 		super.p_();
-	    
+
 	    if(lastX == locX && lastY== locY && lastZ == locZ && moving == 0){
 			moving = 1;
 		}
@@ -62,7 +64,7 @@ public class Arrow extends EntityArrow{
 			moving = 2;
 		}
 	}
-	
+
 	public void destroy(){
 		if(material == EnumBowMaterial.ICE){
 			int radius = 3;
@@ -106,7 +108,7 @@ public class Arrow extends EntityArrow{
 		} else
 		if(material == EnumBowMaterial.TNT){
 			EntityTNTPrimed tnt = new EntityTNTPrimed(this.world, locX, locY, locZ);
-			
+
 			tnt.a = 0;
 			world.addEntity(tnt);
 			tnt.f_();
@@ -120,20 +122,28 @@ public class Arrow extends EntityArrow{
 			CreatureType[] types = { CreatureType.CREEPER, CreatureType.SKELETON, CreatureType.SLIME, CreatureType.SPIDER, CreatureType.ZOMBIE };
 			world.spawnCreature(getBukkitEntity().getLocation(), types[(new Random()).nextInt(5)]);
 		}
- else if(material == EnumBowMaterial.TREE){
+                else if(material == EnumBowMaterial.TREE){
                 	World world = getBukkitEntity().getWorld();
                 	Location loc = getBukkitEntity().getLocation();
                    world.generateTree(loc, TreeType.TREE);
+                   
+                }
+                else if(material == EnumBowMaterial.ZEUS){
+                	Location loc = getBukkitEntity().getLocation();
+                	World worldf = loc.getWorld();
+                	worldf.strikeLightning(loc);
+                	loc.getBlock().setType(Material.FIRE);
+                	EntityTNTPrimed tnt = new EntityTNTPrimed(this.world, locX, locY, locZ);
+
+        			tnt.a = 0;
+        			world.addEntity(tnt);
+        			tnt.f_();
                 }
         else if(material == EnumBowMaterial.THRICE){
 			die();
-		} else
-		if(material == EnumBowMaterial.TREE){
-			World world = getBukkitEntity().getWorld();
-			world.generateTree(getBukkitEntity().getLocation(), TreeType.values()[(new Random()).nextInt(5)]);
 		}
 	}
-	
+
 	public void b(EntityHuman entityhuman) {
 		if ((!this.world.isStatic) && (this.shooter == entityhuman) && moving==2 && (entityhuman.inventory.canHold(new ItemStack(Item.ARROW, 1)))) {
 			this.world.makeSound(this, "random.pop", 0.2F, ((this.random.nextFloat() - this.random.nextFloat()) * 0.7F + 1.0F) * 2.0F);
