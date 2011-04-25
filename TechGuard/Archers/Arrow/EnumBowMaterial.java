@@ -11,7 +11,8 @@ public enum EnumBowMaterial{
 	MONSTER("Monster",0),//Why? It will spawn a random monster, not only a skeleton
         THRICE("Thrice", 3),//Fire 3 arrows
         ZOMBIE("Zombie", 0),//Hit a zombie and it turns into a giant,hit a giant and it turns into a zombie
-        TREE("Tree",0);//Makes a tree grow where it lands
+        TREE("Tree",0),//Makes a tree grow where it lands
+         PIG("Pig",0);//Same as zombie arrow but beetween pig and zombie pigman 
 
 	
 	private String name;
