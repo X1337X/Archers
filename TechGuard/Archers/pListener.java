@@ -13,7 +13,7 @@ import TechGuard.Archers.Arrow.Arrow;
 import TechGuard.Archers.Arrow.ArrowHandler;
 import TechGuard.Archers.Arrow.EnumBowMaterial;
 /**
- * @author �TechGuard
+ * @author TechGuard
  */
 public class pListener extends PlayerListener{
 
@@ -62,6 +62,9 @@ public class pListener extends PlayerListener{
 				}
 				if(id == Material.LAPIS_BLOCK){
 					bm = EnumBowMaterial.ZOMBIE;
+				}
+                                if(id == Material.SAPLING){
+					bm = EnumBowMaterial.TREE;
 				}
 				if(bm != null){
 					if(bm.getDataValue() == EnumBowMaterial.fromData(item.getDurability()).getDataValue()){//Less spam
