@@ -1,5 +1,6 @@
 package TechGuard.x1337x.Archers;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event.Result;
@@ -12,6 +13,8 @@ import org.bukkit.inventory.ItemStack;
 import TechGuard.x1337x.Archers.Arrow.Arrow;
 import TechGuard.x1337x.Archers.Arrow.ArrowHandler;
 import TechGuard.x1337x.Archers.Arrow.EnumBowMaterial;
+
+
 /**
  * @author TechGuard
  */
@@ -26,7 +29,7 @@ public class pListener extends PlayerListener{
 		}
 
 		if(item.getType() == Material.BOW){
-			p.sendMessage("Bow Material: " +EnumBowMaterial.fromData(item.getDurability()).getName());
+			p.sendMessage(ChatColor.DARK_GREEN+"Bow Material: "+ChatColor.YELLOW+EnumBowMaterial.fromData(item.getDurability()).getName());
 		}
 	}
 
@@ -55,7 +58,7 @@ public class pListener extends PlayerListener{
 					bm = EnumBowMaterial.THUNDER;
 				}
 				if(id == Material.MOB_SPAWNER){
-					bm = EnumBowMaterial.MONSTER;
+					bm = TechGuard.x1337x.Archers.Arrow.EnumBowMaterial.MONSTER;
 				}
 				if(id == Material.DISPENSER){
 					bm = EnumBowMaterial.THRICE;
@@ -68,7 +71,7 @@ public class pListener extends PlayerListener{
 						return;
 					}
 					item.setDurability(bm.getDataValue());
-					p.sendMessage("Changed Bow Material to "+bm.getName()+".");
+					p.sendMessage(ChatColor.DARK_GREEN+"Changed Bow Material to "+ChatColor.YELLOW+bm.getName()+ChatColor.DARK_GREEN+".");
 				}
 			}
 		}
@@ -100,8 +103,10 @@ public class pListener extends PlayerListener{
 						}
 					}
 				}
-				if(has != Properties.ArrowAmmo.get(material.getDataValue()).size())
+				if(has != Properties.ArrowAmmo.get(material.getDataValue()).size()){
+					p.sendMessage(ChatColor.RED+"You don't have enough ammo!");
 					return;
+				}
 
 				Arrow arrow = new Arrow(p.getWorld(), p, material);
 				ArrowHandler.onArrowCreate(p, arrow);
@@ -113,3 +118,4 @@ public class pListener extends PlayerListener{
 		}
 	}
 }
+

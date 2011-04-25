@@ -60,7 +60,7 @@ public class Properties {
 		        out.write("TNT:289,2:262,1"); out.newLine();
 		        out.write(""); out.newLine();
 		        out.write("#Thunder Arrow"); out.newLine();
-		        out.write("Thunder:331,5:262,1");
+		        out.write("Thunder:331,5:262,1");out.newLine();
 		        out.write(""); out.newLine();
 		        out.write("#Monster Arrow"); out.newLine();
 		        out.write("Monster:352,2:262,1"); out.newLine();

@@ -13,7 +13,7 @@ import TechGuard.Archers.Arrow.Arrow;
 import TechGuard.Archers.Arrow.ArrowHandler;
 import TechGuard.Archers.Arrow.EnumBowMaterial;
 /**
- * @author ´TechGuard
+ * @author ï¿½TechGuard
  */
 public class pListener extends PlayerListener{
 
@@ -26,7 +26,7 @@ public class pListener extends PlayerListener{
 		}
 		
 		if(item.getType() == Material.BOW){
-			p.sendMessage("§2Bow Material: §e"+EnumBowMaterial.fromData(item.getDurability()).getName());
+			p.sendMessage(ChatColor.DARK_GREEN+"Bow Material: "+ChatColor.YELLOW+EnumBowMaterial.fromData(item.getDurability()).getName());
 		}
 	}
 	
@@ -54,12 +54,21 @@ public class pListener extends PlayerListener{
 				if(id == Material.REDSTONE_ORE){
 					bm = EnumBowMaterial.THUNDER;
 				}
-				if(id == Material.MOSSY_COBBLESTONE){
-					bm = EnumBowMaterial.SKELTION;
+				if(id == Material.MOB_SPAWNER){
+					bm = EnumBowMaterial.MONSTER;
+				}
+				if(id == Material.DISPENSER){
+					bm = EnumBowMaterial.THRICE;
+				}
+				if(id == Material.LAPIS_BLOCK){
+					bm = EnumBowMaterial.ZOMBIE;
 				}
 				if(bm != null){
+					if(bm.getDataValue() == EnumBowMaterial.fromData(item.getDurability()).getDataValue()){//Less spam
+						return;
+					}
 					item.setDurability(bm.getDataValue());
-					p.sendMessage("§2Changed Bow Material to §e"+bm.getName()+"§2.");
+					p.sendMessage(ChatColor.DARK_GREEN+"Changed Bow Material to "+ChatColor.YELLOW+bm.getName()+ChatColor.DARK_GREEN+".");
 				}
 			}
 		}
@@ -91,8 +100,10 @@ public class pListener extends PlayerListener{
 						}
 					}
 				}
-				if(has != Properties.ArrowAmmo.get(material.getDataValue()).size())
+				if(has != Properties.ArrowAmmo.get(material.getDataValue()).size()){
+					p.sendMessage(ChatColor.RED+"You don't have enough ammo!");
 					return;
+				}
 				
 				Arrow arrow = new Arrow(p.getWorld(), p, material);
 				ArrowHandler.onArrowCreate(p, arrow);

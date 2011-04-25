@@ -11,13 +11,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.nijikokun.bukkit.Permissions.Permissions;
 import com.nijiko.permissions.PermissionHandler;
 /**
- * @author ´TechGuard
+ * @author TechGuard
  */
 public class Archers extends JavaPlugin{
 	private eListener eL = new eListener();
 	private pListener pL = new pListener();
 	public static PermissionHandler Permissions;
-		
+
     public void onDisable() {
     	sM("Disabled!");
     }

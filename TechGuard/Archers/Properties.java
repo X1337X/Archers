@@ -14,7 +14,7 @@ import org.bukkit.inventory.ItemStack;
 
 import TechGuard.Archers.Arrow.EnumBowMaterial;
 /**
- * @author ´TechGuard
+ * @author ï¿½TechGuard
  */
 public class Properties {
 	public static HashMap<Short,ArrayList<ItemStack>> ArrowAmmo = new HashMap<Short,ArrayList<ItemStack>>();
@@ -60,12 +60,16 @@ public class Properties {
 		        out.write("TNT:289,2:262,1"); out.newLine();
 		        out.write(""); out.newLine();
 		        out.write("#Thunder Arrow"); out.newLine();
-		        out.write("Thunder:331,5:262,1");
-		        out.write("");
-		        out.newLine();
-		        out.write("#Skeltion arrow");
-		        out.newLine();
-		        out.write("Skeltion:352,5:262,1");
+		        out.write("Thunder:331,5:262,1");out.newLine();
+		        out.write(""); out.newLine();
+		        out.write("#Monster Arrow"); out.newLine();
+		        out.write("Monster:352,2:262,1"); out.newLine();
+		        out.write(""); out.newLine();
+		        out.write("#Thrice Arrow"); out.newLine();
+		        out.write("Thrice:262,3"); out.newLine();
+		        out.write(""); out.newLine();
+		        out.write("#Zombie Arrow"); out.newLine();
+		        out.write("Zombie:295,1,262,1"); out.newLine();
 		        out.close();
 			}
 		}catch(Exception e){

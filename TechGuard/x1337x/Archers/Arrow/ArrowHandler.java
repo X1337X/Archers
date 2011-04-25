@@ -4,6 +4,7 @@ import net.minecraft.server.EntityArrow;
 
 import org.bukkit.craftbukkit.entity.CraftArrow;
 import org.bukkit.entity.CreatureType;
+import org.bukkit.entity.Giant;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.EntityDamageByProjectileEvent;
@@ -32,10 +33,17 @@ public class ArrowHandler {
 		} else
 		if(arrow.material == EnumBowMaterial.ZOMBIE){
 			if(event.getEntity() instanceof Zombie){
-				Zombie zombie = (Zombie)event.getEntity();
-				zombie.getWorld().spawnCreature(zombie.getLocation(), CreatureType.GIANT);
-				zombie.remove();
-			}
+					Zombie zombie = (Zombie)event.getEntity();
+					Giant giant = (Giant)zombie.getWorld().spawnCreature(zombie.getLocation(), CreatureType.GIANT);
+					giant.setHealth(zombie.getHealth());
+					zombie.remove();
+				} else
+				if(event.getEntity() instanceof Giant){
+					Giant giant = (Giant)event.getEntity();
+					Zombie zombie = (Zombie)giant.getWorld().spawnCreature(giant.getLocation(), CreatureType.ZOMBIE);
+					zombie.setHealth(giant.getHealth());
+					giant.remove();
+				}
 		}
 	}
 }

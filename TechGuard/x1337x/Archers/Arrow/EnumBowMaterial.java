@@ -8,7 +8,7 @@ public enum EnumBowMaterial{
 	FIRE("Fire", 5),
 	TNT("TNT", 0),
 	THUNDER("Thunder", 0),
-	MONSTER("Monster", 0),//Why? It will spawn a random monster, not only a skeleton
+	MONSTER("Monster",0),//Why? It will spawn a random monster, not only a skeleton
     THRICE("Thrice", 3),
     ZOMBIE("Zombie", 0);
 

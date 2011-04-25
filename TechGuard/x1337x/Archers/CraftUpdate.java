@@ -4,19 +4,21 @@ import org.bukkit.craftbukkit.inventory.CraftInventoryPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 /**
- * @author ´TechGuard
+ * @author TechGuard
  */
 public class CraftUpdate {
-	
+
 	public static void addItem(Player p, ItemStack q){
 		CraftInventoryPlayer pInv = (CraftInventoryPlayer)p.getInventory();
-		
+
 		pInv.addItem(q);
+		//deprecated need to find work around
 		p.updateInventory();
 	}
+	
 	public static void removeItem(Player p, ItemStack q){
 		CraftInventoryPlayer pInv = (CraftInventoryPlayer)p.getInventory();
-		
+
 		for(int i = 0; i < q.getAmount(); i++){
 			if(pInv.getItem(pInv.first(q.getTypeId())).getAmount() == 1){
 				pInv.remove(new ItemStack(q.getTypeId(), 1));
@@ -25,6 +27,7 @@ public class CraftUpdate {
 				pInv.setItem(pInv.first(q.getTypeId()), new ItemStack(q.getTypeId(), first.getAmount()-1));
 			}
 		}
+		//deprecated need to find work around
 		p.updateInventory();
 	}
 }
