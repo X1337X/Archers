@@ -42,5 +42,17 @@ public class ArrowHandler {
 					giant.remove();
 				}
 		}
-	}
+                          if(arrow.material == EnumBowMaterial.PIG){
+			if(event.getEntity() instanceof Pig){
+				Pig pig = (Pig)event.getEntity();
+				PigZombie pigman = (PigZombie) pig.getWorld().spawnCreature(pig.getLocation(), CreatureType.PIG_ZOMBIE);
+				pig.remove();
+			}
+			else if(event.getEntity() instanceof PigZombie){
+				PigZombie pigzombie = (PigZombie)event.getEntity();
+				Pig pig = (Pig) pigzombie.getWorld().spawnCreature(pigzombie.getLocation(), CreatureType.PIG);
+				pigzombie.remove();
+			}
+		}	
+}
 }
