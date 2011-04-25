@@ -12,8 +12,8 @@ public enum EnumBowMaterial{
         THRICE("Thrice", 3),//Fire 3 arrows
         ZOMBIE("Zombie", 0),//Hit a zombie and it turns into a giant,hit a giant and it turns into a zombie
         TREE("Tree",0),//Makes a tree grow where it lands
-        PIG("Pig",0);//Same as zombie arrow but beetween pig and zombie pigman 
-
+        PIG("Pig",0),//Same as zombie arrow but beetween pig and zombie pigman 
+        ZEUS("Zeus",20);//Fire,lightning and tnt all in one! overkill for the win
 	
 	private String name;
 	private short data;
