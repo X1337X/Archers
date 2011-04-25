@@ -69,6 +69,9 @@ public class pListener extends PlayerListener{
 	                        if(id == Material.GRASS){
 					bm = EnumBowMaterial.PIG;
 				}
+                                if(id == Material.DIAMOND_BLOCK){
+					bm = EnumBowMaterial.ZEUS;
+				}
 				if(bm != null){
 					if(bm.getDataValue() == EnumBowMaterial.fromData(item.getDurability()).getDataValue()){//Less spam
 						return;
