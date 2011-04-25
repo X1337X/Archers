@@ -127,6 +127,10 @@ public class Arrow extends EntityArrow{
                 }
         else if(material == EnumBowMaterial.THRICE){
 			die();
+		} else
+		if(material == EnumBowMaterial.TREE){
+			World world = getBukkitEntity().getWorld();
+			world.generateTree(getBukkitEntity().getLocation(), TreeType.values()[(new Random()).nextInt(5)]);
 		}
 	}
 	
