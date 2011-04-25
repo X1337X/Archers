@@ -1,7 +1,11 @@
 package TechGuard.Archers.Arrow;
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @author TechGuard
+=======
+ * @author �TechGuard
+>>>>>>> e43e95f23c953e7afd9e1691f7e6d64fa13a7610
 =======
  * @author �TechGuard
 >>>>>>> e43e95f23c953e7afd9e1691f7e6d64fa13a7610
@@ -13,11 +17,14 @@ public enum EnumBowMaterial{
 	TNT("TNT", 0),
 	THUNDER("Thunder", 0),
 <<<<<<< HEAD
+<<<<<<< HEAD
 	SKELTION("Skeltion",0),
     THRICE("Thrice", 3),
     ZOMBIE("Zombie",0);
 
 =======
+=======
+>>>>>>> e43e95f23c953e7afd9e1691f7e6d64fa13a7610
 	MONSTER("Monster", 0),//Why? It will spawn a random monster, not only a skeleton
         THRICE("Thrice", 3),
         ZOMBIE("Zombie", 0);
