@@ -72,6 +72,8 @@ public class Properties {
 		        out.write("Zombie:295,1:262,1"); out.newLine();
                         out.write("#Tree Arrow");out.newLine();
 		        out.write("Tree:6,1:262,1");
+                        out.write("#Pig Arrow");out.newLine();
+		        out.write("Pig:320,1:262,1");
 		        out.close();
 			}
 		}catch(Exception e){
