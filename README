@@ -1,6 +1,8 @@
 Robin and Jack(aka TechGuard and 1337) are working on a plugin called: Archers. 
-Version = 0.1
 Custom Arrows, with special abilities.
+Version = 0.1
+Commands :
+/a
 List of arrows:
 Fire arrows
 Lightning arrows
