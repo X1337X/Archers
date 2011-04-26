@@ -1,4 +1,4 @@
-package TechGuard.x1337x.Archers.Arrow;
+package TechGuard.Archers.Arrow;
 
 import java.util.List;
 import java.util.Random;
@@ -141,17 +141,7 @@ public class Arrow extends EntityArrow{
         			world.addEntity(tnt);
         			tnt.f_();
                 }
-                else if(material == EnumBowMaterial.MULTI){
-                	List<Entity> tokill = getBukkitEntity().getNearbyEntities(10, 10, 10);
-                	int size = tokill.size();
-                	int postion = 0;
-                	while(size != postion){
-                	Entity kill = tokill.get(postion);
-                	if(kill instanceof LivingEntity){
-                		((LivingEntity) kill).setHealth(0);
-                	}
-                	postion++;
-                }
+           
                 	
                 }
         else if(material == EnumBowMaterial.THRICE){

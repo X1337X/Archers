@@ -1,4 +1,4 @@
-package TechGuard.x1337x.Archers;
+package TechGuard.Archers;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

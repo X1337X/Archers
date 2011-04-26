@@ -1,20 +1,17 @@
-package TechGuard.x1337x.Archers;
+package TechGuard.Archers;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event.Result;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerListener;
+import org.bukkit.event.player.PlayerItemHeldEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-import TechGuard.x1337x.Archers.Arrow.Arrow;
-import TechGuard.x1337x.Archers.Arrow.ArrowHandler;
-import TechGuard.x1337x.Archers.Arrow.EnumBowMaterial;
-
-
+import TechGuard.Archers.Arrow.Arrow;
+import TechGuard.Archers.Arrow.ArrowHandler;
+import TechGuard.Archers.Arrow.EnumBowMaterial;
 /**
  * @author TechGuard
  */
@@ -23,16 +20,16 @@ public class pListener extends PlayerListener{
 	public void onItemHeldChange(PlayerItemHeldEvent event){
 		Player p = event.getPlayer();
 		ItemStack item = p.getInventory().getContents()[event.getNewSlot()];
-
+		
 		if(item == null){
 			return;
 		}
-
+		
 		if(item.getType() == Material.BOW){
 			p.sendMessage(ChatColor.DARK_GREEN+"Bow Material: "+ChatColor.YELLOW+EnumBowMaterial.fromData(item.getDurability()).getName());
 		}
 	}
-
+	
 	public void onPlayerInteract(PlayerInteractEvent event){
 		if(event.getAction() == Action.LEFT_CLICK_BLOCK){
 			Player p = event.getPlayer();
@@ -41,7 +38,7 @@ public class pListener extends PlayerListener{
 				Material id = event.getClickedBlock().getType();
 				Material id2 = event.getClickedBlock().getRelative(0, 1, 0).getType();
 				EnumBowMaterial bm = null;
-
+				
 				if(id == Material.WOOD || id == Material.LOG){
 					bm = EnumBowMaterial.STANDARD;
 				}
@@ -58,7 +55,7 @@ public class pListener extends PlayerListener{
 					bm = EnumBowMaterial.THUNDER;
 				}
 				if(id == Material.MOB_SPAWNER){
-					bm = TechGuard.x1337x.Archers.Arrow.EnumBowMaterial.MONSTER;
+					bm = EnumBowMaterial.MONSTER;
 				}
 				if(id == Material.DISPENSER){
 					bm = EnumBowMaterial.THRICE;
@@ -66,13 +63,13 @@ public class pListener extends PlayerListener{
 				if(id == Material.LAPIS_BLOCK){
 					bm = EnumBowMaterial.ZOMBIE;
 				}
-				if(id == Material.SAPLING){
+                                if(id == Material.SAPLING){
 					bm = EnumBowMaterial.TREE;
 				}
-				if(id == Material.GRASS){
+	                        if(id == Material.GRASS){
 					bm = EnumBowMaterial.PIG;
 				}
-				if(id == Material.DIAMOND_BLOCK){
+                                if(id == Material.DIAMOND_BLOCK){
 					bm = EnumBowMaterial.ZEUS;
 				}
 				if(bm != null){
@@ -91,11 +88,11 @@ public class pListener extends PlayerListener{
 				event.setUseInteractedBlock(Result.DENY);
 				event.setCancelled(true);
 				EnumBowMaterial material = EnumBowMaterial.fromData(item.getDurability());
-
+				
 				if(!Archers.Permissions.has(p, "archers.bow."+material.getName().toLowerCase())){
 					return;
 				}
-
+				
 				int has = 0;
 				for(ItemStack stack : Properties.ArrowAmmo.get(material.getDataValue())){
 					int amount = 0;
@@ -116,10 +113,19 @@ public class pListener extends PlayerListener{
 					p.sendMessage(ChatColor.RED+"You don't have enough ammo!");
 					return;
 				}
-
-				Arrow arrow = new Arrow(p.getWorld(), p, material);
-				ArrowHandler.onArrowCreate(p, arrow);
-
+				
+				if(material == EnumBowMaterial.THRICE){
+                    for(int i = 0; i <= 2; i++){
+				        Arrow arrow = new Arrow(p.getWorld(), p, EnumBowMaterial.THRICE, i);
+				        ArrowHandler.onArrowCreate(p, arrow);
+                    }
+					Arrow arrow = new Arrow(p.getWorld(), p, EnumBowMaterial.STANDARD);
+					ArrowHandler.onArrowCreate(p, arrow);
+				} else {
+					Arrow arrow = new Arrow(p.getWorld(), p, material);
+					ArrowHandler.onArrowCreate(p, arrow);
+				}
+				
 				for(ItemStack stack : Properties.ArrowAmmo.get(material.getDataValue())){
 					CraftUpdate.removeItem(p, stack);
 				}
@@ -127,4 +133,3 @@ public class pListener extends PlayerListener{
 		}
 	}
 }
-
