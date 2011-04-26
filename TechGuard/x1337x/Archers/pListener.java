@@ -1,4 +1,4 @@
-package TechGuard.Archers;
+package TechGuard.x1337x.Archers;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

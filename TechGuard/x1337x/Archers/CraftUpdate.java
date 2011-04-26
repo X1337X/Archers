@@ -1,4 +1,4 @@
-package TechGuard.Archers;
+package TechGuard.x1337x.Archers;
 
 import org.bukkit.craftbukkit.inventory.CraftInventoryPlayer;
 import org.bukkit.entity.Player;

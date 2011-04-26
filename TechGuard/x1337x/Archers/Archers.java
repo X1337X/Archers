@@ -1,4 +1,4 @@
-package TechGuard.Archers;
+package TechGuard.x1337x.Archers;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event.Priority;
@@ -8,34 +8,38 @@ import org.bukkit.event.Event;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import TechGuard.x1337x.Archers.Commands.ArrowCommand;
+
 import com.nijikokun.bukkit.Permissions.Permissions;
 import com.nijiko.permissions.PermissionHandler;
 /**
- * @author �TechGuard
+ * @author TechGuard
  */
 public class Archers extends JavaPlugin{
 	private eListener eL = new eListener();
 	private pListener pL = new pListener();
 	public static PermissionHandler Permissions;
-		
+
     public void onDisable() {
     	sM("Disabled!");
     }
 
     public void onEnable() {
-         sM("Made by " + this.getDescription().getAuthors() + " Enabled!");
         
+     	loadCommands();
     	registerEvents();
     	setupPermissions();
     	Properties.reload();
+    	 sM("Made by " + this.getDescription().getAuthors() + " Enabled!");
     }
     
     private void registerEvents(){
+    
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvent(Event.Type.PLAYER_ITEM_HELD, pL, Priority.Highest, this);
         pm.registerEvent(Event.Type.PLAYER_INTERACT, pL, Priority.Highest, this);
         
-        pm.registerEvent(Event.Type.ENTITY_DAMAGE, eL, Priority.Highest, this);
+      pm.registerEvent(Event.Type.ENTITY_DAMAGE, eL, Priority.Highest, this);
     }
     
     private void setupPermissions() {
@@ -68,5 +72,8 @@ public class Archers extends JavaPlugin{
 			}
 		}
     	return null;
+    }
+    private void loadCommands(){
+    	getCommand("a").setExecutor(new ArrowCommand(this));
     }
 }

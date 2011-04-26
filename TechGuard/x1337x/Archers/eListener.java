@@ -1,4 +1,4 @@
-package TechGuard.Archers;
+package TechGuard.x1337x.Archers;
 
 import org.bukkit.entity.Arrow;
 import org.bukkit.event.entity.EntityDamageByProjectileEvent;
