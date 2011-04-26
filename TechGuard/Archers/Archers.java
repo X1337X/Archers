@@ -11,7 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.nijikokun.bukkit.Permissions.Permissions;
 import com.nijiko.permissions.PermissionHandler;
 /**
- * @author ´TechGuard
+ * @author ï¿½TechGuard
  */
 public class Archers extends JavaPlugin{
 	private eListener eL = new eListener();
@@ -23,7 +23,7 @@ public class Archers extends JavaPlugin{
     }
 
     public void onEnable() {
-        sM("Enabled!");
+         sM("Made by " + this.getDescription().getAuthors() + " Enabled!");
         
     	registerEvents();
     	setupPermissions();

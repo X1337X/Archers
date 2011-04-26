@@ -13,11 +13,7 @@ import TechGuard.Archers.Arrow.Arrow;
 import TechGuard.Archers.Arrow.ArrowHandler;
 import TechGuard.Archers.Arrow.EnumBowMaterial;
 /**
-<<<<<<< HEAD
- * @author �TechGuard
-=======
  * @author TechGuard
->>>>>>> 7c070997cd8d191722ab6fcca92d47a1490addee
  */
 public class pListener extends PlayerListener{
 
@@ -66,12 +62,15 @@ public class pListener extends PlayerListener{
 				}
 				if(id == Material.LAPIS_BLOCK){
 					bm = EnumBowMaterial.ZOMBIE;
-<<<<<<< HEAD
-=======
 				}
                                 if(id == Material.SAPLING){
 					bm = EnumBowMaterial.TREE;
->>>>>>> 7c070997cd8d191722ab6fcca92d47a1490addee
+				}
+	                        if(id == Material.GRASS){
+					bm = EnumBowMaterial.PIG;
+				}
+                                if(id == Material.DIAMOND_BLOCK){
+					bm = EnumBowMaterial.ZEUS;
 				}
 				if(bm != null){
 					if(bm.getDataValue() == EnumBowMaterial.fromData(item.getDurability()).getDataValue()){//Less spam
@@ -115,8 +114,17 @@ public class pListener extends PlayerListener{
 					return;
 				}
 				
-				Arrow arrow = new Arrow(p.getWorld(), p, material);
-				ArrowHandler.onArrowCreate(p, arrow);
+				if(material == EnumBowMaterial.THRICE){
+                    for(int i = 0; i <= 2; i++){
+				        Arrow arrow = new Arrow(p.getWorld(), p, EnumBowMaterial.THRICE, i);
+				        ArrowHandler.onArrowCreate(p, arrow);
+                    }
+					Arrow arrow = new Arrow(p.getWorld(), p, EnumBowMaterial.STANDARD);
+					ArrowHandler.onArrowCreate(p, arrow);
+				} else {
+					Arrow arrow = new Arrow(p.getWorld(), p, material);
+					ArrowHandler.onArrowCreate(p, arrow);
+				}
 				
 				for(ItemStack stack : Properties.ArrowAmmo.get(material.getDataValue())){
 					CraftUpdate.removeItem(p, stack);
