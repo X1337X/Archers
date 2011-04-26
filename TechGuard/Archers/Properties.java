@@ -70,6 +70,11 @@ public class Properties {
 		        out.write(""); out.newLine();
 		        out.write("#Zombie Arrow"); out.newLine();
 		        out.write("Zombie:295,1,262,1"); out.newLine();
+<<<<<<< HEAD
+=======
+                        out.write("#Tree Arrow");out.newLine();
+		        out.write("Tree:6,1,262,1");
+>>>>>>> 7c070997cd8d191722ab6fcca92d47a1490addee
 		        out.close();
 			}
 		}catch(Exception e){

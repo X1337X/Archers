@@ -1,5 +1,6 @@
 package TechGuard.x1337x.Archers.Arrow;
 
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.server.EntityArrow;
@@ -12,10 +13,12 @@ import net.minecraft.server.MathHelper;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.TreeType;
 import org.bukkit.World;
 import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.craftbukkit.entity.CraftLivingEntity;
 import org.bukkit.entity.CreatureType;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 /**
@@ -121,6 +124,36 @@ public class Arrow extends EntityArrow{
 			CreatureType[] types = { CreatureType.CREEPER, CreatureType.SKELETON, CreatureType.SLIME, CreatureType.SPIDER, CreatureType.ZOMBIE };
 			world.spawnCreature(getBukkitEntity().getLocation(), types[(new Random()).nextInt(5)]);
 		}
+                else if(material == EnumBowMaterial.TREE){
+                	World world = getBukkitEntity().getWorld();
+                	Location loc = getBukkitEntity().getLocation();
+                   world.generateTree(loc, TreeType.TREE);
+                   
+                }
+                else if(material == EnumBowMaterial.ZEUS){
+                	Location loc = getBukkitEntity().getLocation();
+                	World worldf = loc.getWorld();
+                	worldf.strikeLightning(loc);
+                	loc.getBlock().setType(Material.FIRE);
+                	EntityTNTPrimed tnt = new EntityTNTPrimed(this.world, locX, locY, locZ);
+
+        			tnt.a = 0;
+        			world.addEntity(tnt);
+        			tnt.f_();
+                }
+                else if(material == EnumBowMaterial.MULTI){
+                	List<Entity> tokill = getBukkitEntity().getNearbyEntities(10, 10, 10);
+                	int size = tokill.size();
+                	int postion = 0;
+                	while(size != postion){
+                	Entity kill = tokill.get(postion);
+                	if(kill instanceof LivingEntity){
+                		((LivingEntity) kill).setHealth(0);
+                	}
+                	postion++;
+                }
+                	
+                }
         else if(material == EnumBowMaterial.THRICE){
 			die();
 		}

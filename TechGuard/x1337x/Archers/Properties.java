@@ -69,7 +69,13 @@ public class Properties {
 		        out.write("Thrice:262,3"); out.newLine();
 		        out.write(""); out.newLine();
 		        out.write("#Zombie Arrow"); out.newLine();
-		        out.write("Zombie:295,1,262,1"); out.newLine();
+		        out.write("Zombie:295,1:262,1"); out.newLine();
+		        out.write("#Tree Arrow");out.newLine();
+		        out.write("Tree:6,1:262,1");out.newLine();
+		        out.write("#Pig Arrow");out.newLine();
+		        out.write("Pig:320,1:262,1");out.newLine();
+		        out.write("#Zeus Arrow");out.newLine();
+		        out.write("Zeus:264,2:262,1");
 		        out.close();
 			}
 		}catch(Exception e){

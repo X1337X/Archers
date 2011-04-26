@@ -120,6 +120,14 @@ public class Arrow extends EntityArrow{
 			CreatureType[] types = { CreatureType.CREEPER, CreatureType.SKELETON, CreatureType.SLIME, CreatureType.SPIDER, CreatureType.ZOMBIE };
 			world.spawnCreature(getBukkitEntity().getLocation(), types[(new Random()).nextInt(5)]);
 		}
+<<<<<<< HEAD
+=======
+ else if(material == EnumBowMaterial.TREE){
+                	World world = getBukkitEntity().getWorld();
+                	Location loc = getBukkitEntity().getLocation();
+                   world.generateTree(loc, TreeType.TREE);
+                }
+>>>>>>> 7c070997cd8d191722ab6fcca92d47a1490addee
         else if(material == EnumBowMaterial.THRICE){
 			die();
 		}

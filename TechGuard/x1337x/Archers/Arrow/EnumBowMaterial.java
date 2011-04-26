@@ -3,14 +3,19 @@ package TechGuard.x1337x.Archers.Arrow;
  * @author TechGuard
  */
 public enum EnumBowMaterial{
-	STANDARD("Normal", 4),
-	ICE("Ice", 7),
-	FIRE("Fire", 5),
-	TNT("TNT", 0),
-	THUNDER("Thunder", 0),
+	STANDARD("Normal", 4),//Normal arrow
+	ICE("Ice", 7),//Turns where arrow lands to ice(ice ice baby)
+	FIRE("Fire", 5),//Sets fire to target entity/block
+	TNT("TNT", 0),//Creates a primed TNT block at target
+	THUNDER("Thunder", 0),//Thunder lands at target
 	MONSTER("Monster",0),//Why? It will spawn a random monster, not only a skeleton
-    THRICE("Thrice", 3),
-    ZOMBIE("Zombie", 0);
+    THRICE("Thrice", 3),//Fire 3 arrows
+    ZOMBIE("Zombie", 0),//Hit a zombie and it turns into a giant,hit a giant and it turns into a zombie
+    TREE("Tree",0),//Makes a tree grow where it lands
+    PIG("Pig",0),//Same as zombie arrow but beetween pig and zombie pigman 
+    ZEUS("Zeus",20),//Fire,lightning and tnt all in one! overkill for the win
+    MULTI("Multi",20);//kills all entitys around the hit block,player
+    
 
 	private String name;
 	private short data;

@@ -23,7 +23,7 @@ public class Archers extends JavaPlugin{
     }
 
     public void onEnable() {
-        sM("Enabled!");
+        sM("Made by " + this.getDescription().getAuthors() + "Enabled!");
         
     	registerEvents();
     	setupPermissions();
