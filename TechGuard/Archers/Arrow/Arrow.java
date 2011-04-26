@@ -1,108 +1,159 @@
 package TechGuard.Archers.Arrow;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 
-import org.bukkit.inventory.ItemStack;
+import net.minecraft.server.EntityArrow;
+import net.minecraft.server.EntityHuman;
+import net.minecraft.server.EntityLiving;
+import net.minecraft.server.EntityTNTPrimed;
+import net.minecraft.server.Item;
+import net.minecraft.server.ItemStack;
+import net.minecraft.server.MathHelper;
 
-import TechGuard.x1337x.Archers.Arrow.EnumBowMaterial;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.TreeType;
+import org.bukkit.World;
+import org.bukkit.craftbukkit.CraftWorld;
+import org.bukkit.craftbukkit.entity.CraftLivingEntity;
+import org.bukkit.entity.CreatureType;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.util.Vector;
 /**
  * @author TechGuard
  */
-public class Properties {
-	public static HashMap<Short,ArrayList<ItemStack>> ArrowAmmo = new HashMap<Short,ArrayList<ItemStack>>();
-	private static String dir = "plugins/Archers/";
-	private static File ConfigFile;
+public class Arrow extends EntityArrow{
+	public EnumBowMaterial material;
+	private int moving = 0;
 
-	public static void reload(){
-		load();
+	public Arrow(World world, LivingEntity entityliving, EnumBowMaterial material) {
+		super(((CraftWorld)world).getHandle(), ((CraftLivingEntity)entityliving).getHandle());	
+		this.material = material;
 	}
 
-	private static void load(){
-		ConfigFile = new File(dir + "config.ammo");
-		checkForConfig();
+        public Arrow(World w, LivingEntity el, EnumBowMaterial material, int thrice) {
+		super(((CraftWorld)w).getHandle());
+		this.material = material;
+		EntityLiving entityliving = ((CraftLivingEntity)el).getHandle();
 
-		loadConfig();
+	    this.shooter = entityliving;
+	    b(0.5F, 0.5F);
+	    int int0 = 0;
+	    if(thrice==0) int0 = -10;
+	    if(thrice==1) int0 = 10;
+	    setPositionRotation(entityliving.locX, entityliving.locY + entityliving.s(), entityliving.locZ, entityliving.yaw+int0, entityliving.pitch);
+	    this.locX -= MathHelper.cos(this.yaw / 180.0F * 3.141593F) * 0.16F;
+	    this.locY -= 0.1000000014901161D;
+	    this.locZ -= MathHelper.sin(this.yaw / 180.0F * 3.141593F) * 0.16F;
+	    setPosition(this.locX, this.locY, this.locZ);
+	    this.height = 0.0F;
+	    this.motX = (-MathHelper.sin(this.yaw / 180.0F * 3.141593F) * MathHelper.cos(this.pitch / 180.0F * 3.141593F));
+	    this.motZ = (MathHelper.cos(this.yaw / 180.0F * 3.141593F) * MathHelper.cos(this.pitch / 180.0F * 3.141593F));
+	    this.motY = (-MathHelper.sin(this.pitch / 180.0F * 3.141593F));
+	    a(this.motX, this.motY, this.motZ, 1.5F, 1.0F);
 	}
 
-	private static void checkForConfig(){
-		try{
-			if(!ConfigFile.exists()){
-				ConfigFile.getParentFile().mkdirs();
-				ConfigFile.createNewFile();
-		        BufferedWriter out = new BufferedWriter(new FileWriter(ConfigFile));
+	public void p_() {
+		super.p_();
 
-		        out.write("#The right order:"); out.newLine();
-		        out.write("#  ARROW NAME:ITEM ID,AMOUNT:NEW ITEM ID, AMOUNT, etc. etc."); out.newLine();
-		        out.write("#Arrow names:"); out.newLine();
-		       	for(EnumBowMaterial bow : EnumBowMaterial.values()){
-		       		out.write("  "+bow.getName()); out.newLine();
-		       	}
-		        out.write("#Lines witch start with the # symbol, will be ignored!"); out.newLine();
-		        out.write(""); out.newLine();
-		        out.write("#Normal Arrow"); out.newLine();
-		        out.write("Normal:262,1"); out.newLine();
-		        out.write(""); out.newLine();
-		        out.write("#Ice Arrow"); out.newLine();
-		        out.write("Ice:332,1:262,1"); out.newLine();
-		        out.write(""); out.newLine();
-		        out.write("#Fire Arrow"); out.newLine();
-		        out.write("Fire:263,1:262,1"); out.newLine();
-		        out.write(""); out.newLine();
-		        out.write("#TNT Arrow"); out.newLine();
-		        out.write("TNT:289,2:262,1"); out.newLine();
-		        out.write(""); out.newLine();
-		        out.write("#Thunder Arrow"); out.newLine();
-		        out.write("Thunder:331,5:262,1");out.newLine();
-		        out.write(""); out.newLine();
-		        out.write("#Monster Arrow"); out.newLine();
-		        out.write("Monster:352,2:262,1"); out.newLine();
-		        out.write(""); out.newLine();
-		        out.write("#Thrice Arrow"); out.newLine();
-		        out.write("Thrice:262,3"); out.newLine();
-		        out.write(""); out.newLine();
-		        out.write("#Zombie Arrow"); out.newLine();
-		        out.write("Zombie:295,1:262,1"); out.newLine();
-		        out.write("#Tree Arrow");out.newLine();
-		        out.write("Tree:6,1:262,1");out.newLine();
-		        out.write("#Pig Arrow");out.newLine();
-		        out.write("Pig:320,1:262,1");out.newLine();
-		        out.write("#Zeus Arrow");out.newLine();
-		        out.write("Zeus:264,2:262,1");
-		        out.close();
-			}
-		}catch(Exception e){
-			e.printStackTrace();
+	    if(lastX == locX && lastY== locY && lastZ == locZ && moving == 0){
+			moving = 1;
+		}
+		if(moving == 1){
+			destroy();
+			moving = 2;
 		}
 	}
 
-	private static void loadConfig(){
-		try{
-		    BufferedReader br = new BufferedReader(new InputStreamReader(new DataInputStream(new FileInputStream(ConfigFile))));
-		    String strLine;
-		    while ((strLine = br.readLine()) != null){
-		    	if(strLine.startsWith("#") || strLine.startsWith(" ") || !strLine.contains(":")){
-		    		continue;
-		    	}
-		    	String[] split = strLine.split(":");
-		    	ArrayList<ItemStack> list = new ArrayList<ItemStack>();
-		    	for(String s : split){
-		    		if(s.contains(",")){
-		    			list.add(new ItemStack(Integer.parseInt(s.split(",")[0]), Integer.parseInt(s.split(",")[1])));
-		    		}
-		    	}
-		    	ArrowAmmo.put(EnumBowMaterial.fromName(split[0]).getDataValue(), list);
-		    }
-		    br.close();
-		}catch(Exception e){
-			e.printStackTrace();
+	public void destroy(){
+		if(material == EnumBowMaterial.ICE){
+			int radius = 3;
+			int radiusSq = (int)Math.pow(radius, 2.0D);
+			World world = getBukkitEntity().getWorld();
+
+		    for(int x = getBukkitEntity().getLocation().getBlockX()-radius; x <= getBukkitEntity().getLocation().getBlockX()+radius; x++){
+			  for(int z = getBukkitEntity().getLocation().getBlockZ()-radius; z <= getBukkitEntity().getLocation().getBlockZ()+radius; z++){
+				  if(new Vector(x, getBukkitEntity().getLocation().getBlockY(), z).distanceSquared(new Vector(
+				  getBukkitEntity().getLocation().getX(),getBukkitEntity().getLocation().getY(), getBukkitEntity().getLocation().getZ())) > radiusSq){
+					  continue;
+			      }
+				  if((new Random()).nextInt(4) > 0){
+					  continue;
+				  }
+				  for(int y = getBukkitEntity().getLocation().getBlockY()+radius; y >= getBukkitEntity().getLocation().getBlockY()-radius; y--){
+					  int id = world.getBlockTypeIdAt(x, y, z);
+					  if ((id == 6) || (id == 10) || (id == 11) || (id == 37) || (id == 38) || (id == 39) || (id == 40) || (id == 44) ||
+					  (id == 50) || (id == 51) || (id == 53) || (id == 55) || (id == 59) || ((id >= 63) && (id <= 72)) || (id == 75) ||
+					  (id == 76) || (id == 77) || (id == 78) || (id == 79) || (id == 81) || (id == 83) || (id == 85) || (id == 90)){
+						  break;
+					  }
+					  if ((id == 8) || (id == 9)) {
+						  world.getBlockAt(x, y, z).setTypeId(79);
+						  break;
+				      }
+					  if (id != 0) {
+						  if (y == 127){
+							  break;
+						  }
+						  world.getBlockAt(x, y+1, z).setTypeId(78);
+						  break;
+					  }
+				  }
+			  }
+			}
+		} else
+		if(material == EnumBowMaterial.FIRE){
+			World world = getBukkitEntity().getWorld();
+			world.getBlockAt((int)locX, (int)locY, (int)locZ).setType(Material.FIRE);
+		} else
+		if(material == EnumBowMaterial.TNT){
+			EntityTNTPrimed tnt = new EntityTNTPrimed(this.world, locX, locY, locZ);
+
+			tnt.a = 0;
+			world.addEntity(tnt);
+			tnt.f_();
+		} else
+		if(material == EnumBowMaterial.THUNDER){
+			World world = getBukkitEntity().getWorld();
+			world.strikeLightning(new Location(world, locX, locY, locZ));
+		}else
+                if(material == EnumBowMaterial.MONSTER){
+			World world = getBukkitEntity().getWorld();
+			CreatureType[] types = { CreatureType.CREEPER, CreatureType.SKELETON, CreatureType.SLIME, CreatureType.SPIDER, CreatureType.ZOMBIE };
+			world.spawnCreature(getBukkitEntity().getLocation(), types[(new Random()).nextInt(5)]);
+		}
+                else if(material == EnumBowMaterial.TREE){
+                	World world = getBukkitEntity().getWorld();
+                	Location loc = getBukkitEntity().getLocation();
+                   world.generateTree(loc, TreeType.TREE);
+                   
+                }
+                else if(material == EnumBowMaterial.ZEUS){
+                	Location loc = getBukkitEntity().getLocation();
+                	World worldf = loc.getWorld();
+                	worldf.strikeLightning(loc);
+                	loc.getBlock().setType(Material.FIRE);
+                	EntityTNTPrimed tnt = new EntityTNTPrimed(this.world, locX, locY, locZ);
+
+        			tnt.a = 0;
+        			world.addEntity(tnt);
+        			tnt.f_();
+                }
+           
+                	
+                }
+        else if(material == EnumBowMaterial.THRICE){
+			die();
+		}
+	}
+
+	public void b(EntityHuman entityhuman) {
+		if ((!this.world.isStatic) && (this.shooter == entityhuman) && moving==2 && (entityhuman.inventory.canHold(new ItemStack(Item.ARROW, 1)))) {
+			this.world.makeSound(this, "random.pop", 0.2F, ((this.random.nextFloat() - this.random.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+			entityhuman.receive(this, 1);
+			die();
 		}
 	}
 }
