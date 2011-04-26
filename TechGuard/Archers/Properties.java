@@ -12,33 +12,33 @@ import java.util.HashMap;
 
 import org.bukkit.inventory.ItemStack;
 
-import TechGuard.Archers.Arrow.EnumBowMaterial;
+import TechGuard.x1337x.Archers.Arrow.EnumBowMaterial;
 /**
- * @author �TechGuard
+ * @author TechGuard
  */
 public class Properties {
 	public static HashMap<Short,ArrayList<ItemStack>> ArrowAmmo = new HashMap<Short,ArrayList<ItemStack>>();
 	private static String dir = "plugins/Archers/";
 	private static File ConfigFile;
-	
+
 	public static void reload(){
 		load();
 	}
-	
+
 	private static void load(){
 		ConfigFile = new File(dir + "config.ammo");
 		checkForConfig();
-		
+
 		loadConfig();
 	}
-	
+
 	private static void checkForConfig(){
 		try{
 			if(!ConfigFile.exists()){
 				ConfigFile.getParentFile().mkdirs();
 				ConfigFile.createNewFile();
 		        BufferedWriter out = new BufferedWriter(new FileWriter(ConfigFile));
-		        
+
 		        out.write("#The right order:"); out.newLine();
 		        out.write("#  ARROW NAME:ITEM ID,AMOUNT:NEW ITEM ID, AMOUNT, etc. etc."); out.newLine();
 		        out.write("#Arrow names:"); out.newLine();
@@ -70,17 +70,19 @@ public class Properties {
 		        out.write(""); out.newLine();
 		        out.write("#Zombie Arrow"); out.newLine();
 		        out.write("Zombie:295,1:262,1"); out.newLine();
-                        out.write("#Tree Arrow");out.newLine();
-		        out.write("Tree:6,1:262,1");
-                        out.write("#Pig Arrow");out.newLine();
-		        out.write("Pig:320,1:262,1");
+		        out.write("#Tree Arrow");out.newLine();
+		        out.write("Tree:6,1:262,1");out.newLine();
+		        out.write("#Pig Arrow");out.newLine();
+		        out.write("Pig:320,1:262,1");out.newLine();
+		        out.write("#Zeus Arrow");out.newLine();
+		        out.write("Zeus:264,2:262,1");
 		        out.close();
 			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
-	
+
 	private static void loadConfig(){
 		try{
 		    BufferedReader br = new BufferedReader(new InputStreamReader(new DataInputStream(new FileInputStream(ConfigFile))));
