@@ -17,7 +17,6 @@ import org.bukkit.World;
 import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.craftbukkit.entity.CraftLivingEntity;
 import org.bukkit.entity.CreatureType;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
@@ -142,16 +141,11 @@ public class Arrow extends EntityArrow{
         			tnt.f_();
                 }
                 else if(material == EnumBowMaterial.TP){
-                	Location tploc = getBukkitEntity().getLocation();
-                	if(this.shooter instanceof Player){
-                	Player player = (Player) this.shooter;
-                	player.teleport(tploc);
+                	if(shooter.getBukkitEntity() instanceof Player){
+                		Player p = ((Player)shooter.getBukkitEntity());
+                		p.teleportTo(new Location(p.getWorld(),locX, locY, locZ, shooter.yaw, shooter.pitch));
                 	}
-               
                 }
-           
-                	
-                
         else if(material == EnumBowMaterial.THRICE){
 			die();
 		}
