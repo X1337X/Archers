@@ -74,6 +74,6 @@ public class Archers extends JavaPlugin{
     	return null;
     }
     private void loadCommands(){
-    	getCommand("a").setExecutor(new ArrowCommand(this));
+    	getCommand("arrow").setExecutor(new ArrowCommand(this));
     }
 }
