@@ -11,6 +11,6 @@ authors:
  
           - x1337x
 commands:
-  a:
+  arrow:
      description: Display a list of arrows
      usage: /<command> [arrowname]
