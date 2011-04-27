@@ -63,7 +63,7 @@ public class ArrowHandler {
 			}
 		}	
         if(arrow.material == EnumBowMaterial.FLY){
-			event.getEntity().setVelocity(new Vector(0, 20, 0));
+			event.getEntity().setVelocity(new Vector(0, 100, 0));
 		}
 }
 }
