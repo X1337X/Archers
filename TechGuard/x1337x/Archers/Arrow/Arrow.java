@@ -25,7 +25,10 @@ import org.bukkit.util.Vector;
  */
 public class Arrow extends EntityArrow{
 	public EnumBowMaterial material;
+	public int speed = 0;
+	
 	private int moving = 0;
+	private double firstY = 123;
 
 	public Arrow(World world, LivingEntity entityliving, EnumBowMaterial material) {
 		super(((CraftWorld)world).getHandle(), ((CraftLivingEntity)entityliving).getHandle());	
@@ -56,6 +59,12 @@ public class Arrow extends EntityArrow{
 
 	public void p_() {
 		super.p_();
+
+		if(firstY == 123) firstY = motY;
+		if(speed > 0){
+			motY = firstY;
+			speed--;
+		}
 
 	    if(lastX == locX && lastY== locY && lastZ == locZ && moving == 0){
 			moving = 1;
