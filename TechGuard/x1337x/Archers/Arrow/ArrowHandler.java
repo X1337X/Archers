@@ -4,16 +4,13 @@ import net.minecraft.server.EntityArrow;
 
 import org.bukkit.craftbukkit.entity.CraftArrow;
 import org.bukkit.entity.CreatureType;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Giant;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Pig;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.EntityDamageByProjectileEvent;
-
-
+import org.bukkit.util.Vector;
 /**
  * @author TechGuard
  */
@@ -65,10 +62,7 @@ public class ArrowHandler {
 				pigman.remove();
 			}
 			if(arrow.material == EnumBowMaterial.FLY){
-				Entity entity = event.getEntity();
-				if(entity instanceof LivingEntity){
-					entity.getLocation().setY(entity.getLocation().getY()+20);
-				}
+				event.getEntity().setVelocity(new Vector(0, 20, 0));
 			}
 		}	
 }
