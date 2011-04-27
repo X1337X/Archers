@@ -1,4 +1,4 @@
-package TechGuard.Archers.Arrow;
+package TechGuard.x1337x.Archers.Arrow;
 
 import java.util.List;
 import java.util.Random;
@@ -140,9 +140,6 @@ public class Arrow extends EntityArrow{
         			tnt.a = 0;
         			world.addEntity(tnt);
         			tnt.f_();
-                }
-           
-                	
                 }
         else if(material == EnumBowMaterial.THRICE){
 			die();
