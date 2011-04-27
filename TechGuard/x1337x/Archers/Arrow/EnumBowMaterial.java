@@ -1,28 +1,32 @@
 package TechGuard.x1337x.Archers.Arrow;
+
+import org.bukkit.Material;
 /**
  * @author TechGuard
  */
 public enum EnumBowMaterial{
-	STANDARD("Normal", 4),//Normal arrow
-	ICE("Ice", 7),//Turns where arrow lands to ice(ice ice baby)
-	FIRE("Fire", 5),//Sets fire to target entity/block
-	TNT("TNT", 0),//Creates a primed TNT block at target
-	THUNDER("Thunder", 0),//Thunder lands at target
-	MONSTER("Monster",0),//Why? It will spawn a random monster, not only a skeleton
-        THRICE("Thrice", 3),//Fire 3 arrows
-        ZOMBIE("Zombie", 0),//Hit a zombie and it turns into a giant,hit a giant and it turns into a zombie
-        TREE("Tree",0),//Makes a tree grow where it lands
-        PIG("Pig",0),//Same as zombie arrow but beetween pig and zombie pigman 
-        ZEUS("Zeus",20);//Fire,lightning and tnt all in one! overkill for the win
+	STANDARD(	"Normal",	4,		new Object[]{ Material.LOG, Material.WOOD }),
+	ICE(		"Ice",		7,		new Object[]{ Material.SNOW, Material.ICE }),
+	FIRE(		"Fire",		5,		new Object[]{ Material.FIRE }),
+	TNT(		"TNT",		0,		new Object[]{ Material.TNT }),
+	THUNDER(	"Thunder",	0,		new Object[]{ Material.REDSTONE_ORE }),
+	MONSTER(	"Monster",	0,		new Object[]{ Material.MOB_SPAWNER }),
+    THRICE(		"Thrice",	3,		new Object[]{ Material.DISPENSER }),
+    ZOMBIE(		"Zombie",	0,		new Object[]{ Material.LAPIS_BLOCK }),
+    TREE(		"Tree",		0,		new Object[]{ Material.SAPLING }),
+    PIG(		"Pig",		0,		new Object[]{ Material.GRASS }),
+    ZEUS(		"Zeus",		20,		new Object[]{ Material.DIAMOND_BLOCK });
 	
 	private String name;
 	private short data;
 	private int damage;
+	private Object[] activate;
 	
-	EnumBowMaterial(String name, int damage){
+	EnumBowMaterial(String name, int damage, Object[] activate){
 		this.name = name;
 		this.data = ArrowHandler.lastData++;
 		this.damage = damage;
+		this.activate = activate;
 	}
 	
 	public String getName(){
@@ -35,6 +39,10 @@ public enum EnumBowMaterial{
 	
 	public int getDamageValue(){
 		return damage;
+	}
+	
+	public Object[] getBlocks(){
+		return activate;
 	}
 	
 	public static EnumBowMaterial fromData(short data){
