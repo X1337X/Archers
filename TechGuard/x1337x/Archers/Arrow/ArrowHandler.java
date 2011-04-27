@@ -63,7 +63,8 @@ public class ArrowHandler {
 			}
 		}	
         if(arrow.material == EnumBowMaterial.FLY){
-			event.getEntity().setVelocity(new Vector(0, 100, 0));
+        	org.bukkit.entity.LivingEntity entity = (org.bukkit.entity.LivingEntity)event.getEntity();
+			entity.teleportTo(new Location(entity.getWorld(), entity.getLocation().getX(),entity.getLocation().getY()+20, entity.getLocation().getZ()));
 		}
 }
 }
