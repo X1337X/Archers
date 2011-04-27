@@ -5,9 +5,9 @@ import org.bukkit.event.entity.EntityDamageByProjectileEvent;
 import org.bukkit.event.entity.EntityListener;
 import org.bukkit.event.entity.EntityDamageEvent;
 
-import TechGuard.Archers.Arrow.ArrowHandler;
+import TechGuard.x1337x.Archers.Arrow.ArrowHandler;
 /**
- * @author ´TechGuard
+ * @author TechGuard
  */
 public class eListener extends EntityListener{
 

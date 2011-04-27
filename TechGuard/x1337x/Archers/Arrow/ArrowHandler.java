@@ -1,12 +1,17 @@
-package TechGuard.Archers.Arrow;
+package TechGuard.x1337x.Archers.Arrow;
 
 import net.minecraft.server.EntityArrow;
 
+import org.bukkit.entity.CreatureType;
+import org.bukkit.entity.Giant;
+import org.bukkit.entity.Pig;
+import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.EntityDamageByProjectileEvent;
 import org.bukkit.craftbukkit.entity.CraftArrow;
 /**
- * @author �TechGuard
+ * @author TechGuard
  */
 public class ArrowHandler {
 	public static short lastData = 0;

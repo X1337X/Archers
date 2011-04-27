@@ -1,6 +1,20 @@
-package x1337x.Archers;
+package TechGuard.x1337x.Archers;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import org.bukkit.inventory.ItemStack;
 
 import TechGuard.x1337x.Archers.Arrow.EnumBowMaterial;
+
+
 /**
  * @author TechGuard
  */
@@ -63,7 +77,12 @@ public class Properties {
 		        out.write("#Pig Arrow");out.newLine();
 		        out.write("Pig:320,1:262,1");out.newLine();
 		        out.write("#Zeus Arrow");out.newLine();
-		        out.write("Zeus:264,2:262,1");
+		        out.write("Zeus:264,2:262,1");out.newLine();
+		        out.write("#TP Arrow");out.newLine();
+		        out.write("Tp:287,1:262,1");out.newLine();
+		        out.write("Fly arrow");out.newLine();
+		        out.write("Fly:288,5:262,1");
+		        
 		        out.close();
 			}
 		}catch(Exception e){
