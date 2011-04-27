@@ -40,39 +40,14 @@ public class pListener extends PlayerListener{
 				Material id2 = event.getClickedBlock().getRelative(0, 1, 0).getType();
 				EnumBowMaterial bm = null;
 				
-				if(id == Material.WOOD || id == Material.LOG){
-					bm = EnumBowMaterial.STANDARD;
+				for(EnumBowMaterial material : EnumBowMaterial.values()){
+					for(Object object : material.getBlocks()){
+						if(id == (Material)object || id2 == (Material)object){
+							bm = material;
+						}
+					}
 				}
-				if(id == Material.SNOW || id == Material.ICE){
-					bm = EnumBowMaterial.ICE;
-				}
-				if(id2 == Material.FIRE){
-					bm = EnumBowMaterial.FIRE;
-				}
-				if(id == Material.TNT){
-					bm = EnumBowMaterial.TNT;
-				}
-				if(id == Material.REDSTONE_ORE){
-					bm = EnumBowMaterial.THUNDER;
-				}
-				if(id == Material.MOB_SPAWNER){
-					bm = EnumBowMaterial.MONSTER;
-				}
-				if(id == Material.DISPENSER){
-					bm = EnumBowMaterial.THRICE;
-				}
-				if(id == Material.LAPIS_BLOCK){
-					bm = EnumBowMaterial.ZOMBIE;
-				}
-                                if(id == Material.SAPLING){
-					bm = EnumBowMaterial.TREE;
-				}
-	                        if(id == Material.GRASS){
-					bm = EnumBowMaterial.PIG;
-				}
-                                if(id == Material.DIAMOND_BLOCK){
-					bm = EnumBowMaterial.ZEUS;
-				}
+
 				if(bm != null){
 					if(bm.getDataValue() == EnumBowMaterial.fromData(item.getDurability()).getDataValue()){//Less spam
 						return;
