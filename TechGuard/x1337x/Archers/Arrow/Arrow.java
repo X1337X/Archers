@@ -143,15 +143,9 @@ public class Arrow extends EntityArrow{
                 }
                 else if(material == EnumBowMaterial.TP){
                 	Location tploc = getBukkitEntity().getLocation();
-                	if(this.shooter instanceof Player){
-                	Player player = (Player) this.shooter;
-                	player.teleport(tploc);
-                	}
-               
+                	if(this.shooter instanceof Player)
+	                	((Player)this.shooter).teleportTo(tploc);
                 }
-           
-                	
-                
         else if(material == EnumBowMaterial.THRICE){
 			die();
 		}
