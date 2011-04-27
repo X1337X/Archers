@@ -1,6 +1,5 @@
 package TechGuard.x1337x.Archers.Arrow;
 
-import java.util.List;
 import java.util.Random;
 
 import net.minecraft.server.EntityArrow;
@@ -20,6 +19,7 @@ import org.bukkit.craftbukkit.entity.CraftLivingEntity;
 import org.bukkit.entity.CreatureType;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 /**
  * @author TechGuard
@@ -141,10 +141,22 @@ public class Arrow extends EntityArrow{
         			world.addEntity(tnt);
         			tnt.f_();
                 }
+                else if(material == EnumBowMaterial.TP){
+                	Location tploc = getBukkitEntity().getLocation();
+                	if(this.shooter instanceof Player){
+                	Player player = (Player) this.shooter;
+                	player.teleport(tploc);
+                	}
+               
+                }
+           
+                	
+                
         else if(material == EnumBowMaterial.THRICE){
 			die();
 		}
-	}
+
+}
 
 	public void b(EntityHuman entityhuman) {
 		if ((!this.world.isStatic) && (this.shooter == entityhuman) && moving==2 && (entityhuman.inventory.canHold(new ItemStack(Item.ARROW, 1)))) {
