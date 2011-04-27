@@ -26,7 +26,7 @@ public class ArrowCommand implements CommandExecutor {
 			for(EnumBowMaterial bow : EnumBowMaterial.values()){
 	       		p.sendMessage("  "+ChatColor.YELLOW+bow.getName());
 	       	}
-			p.sendMessage(ChatColor.DARK_GREEN+"To see more info about the arrow: "+ChatColor.YELLOW+"/a [arrow name]");
+			p.sendMessage(ChatColor.DARK_GREEN+"To see more info about the arrow: "+ChatColor.YELLOW+"/arrow [arrow name]");
 		} else
 		if(arg3.length >= 1){
 			EnumBowMaterial arrow = EnumBowMaterial.fromName(arg3[0]);
