@@ -61,9 +61,9 @@ public class ArrowHandler {
 				pig.setHealth(pigman.getHealth());
 				pigman.remove();
 			}
-			if(arrow.material == EnumBowMaterial.FLY){
-				event.getEntity().setVelocity(new Vector(0, 20, 0));
-			}
 		}	
+        if(arrow.material == EnumBowMaterial.FLY){
+			event.getEntity().setVelocity(new Vector(0, 20, 0));
+		}
 }
 }
