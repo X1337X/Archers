@@ -19,13 +19,17 @@ import org.bukkit.craftbukkit.entity.CraftLivingEntity;
 import org.bukkit.entity.CreatureType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.material.Torch;
 import org.bukkit.util.Vector;
 /**
  * @author TechGuard
  */
 public class Arrow extends EntityArrow{
 	public EnumBowMaterial material;
+	public int speed = 0;
+	
 	private int moving = 0;
+	private double firstY = 123;
 
 	public Arrow(World world, LivingEntity entityliving, EnumBowMaterial material) {
 		super(((CraftWorld)world).getHandle(), ((CraftLivingEntity)entityliving).getHandle());	
@@ -56,6 +60,12 @@ public class Arrow extends EntityArrow{
 
 	public void p_() {
 		super.p_();
+
+		if(firstY == 123) firstY = motY;
+		if(speed > 0){
+			motY = firstY;
+			speed--;
+		}
 
 	    if(lastX == locX && lastY== locY && lastZ == locZ && moving == 0){
 			moving = 1;
@@ -143,12 +153,18 @@ public class Arrow extends EntityArrow{
                 else if(material == EnumBowMaterial.TP){
                 	if(shooter.getBukkitEntity() instanceof Player){
                 		Player p = ((Player)shooter.getBukkitEntity());
-                		p.teleportTo(new Location(p.getWorld(),locX, locY, locZ, shooter.yaw, shooter.pitch));
+                		p.teleport(new Location(p.getWorld(),locX, locY, locZ, shooter.yaw, shooter.pitch));
                 	}
                 }
         else if(material == EnumBowMaterial.THRICE){
 			die();
 		}
+        else if(material == EnumBowMaterial.TORCH){
+        	Torch torch = new Torch();
+        	Location loc = getBukkitEntity().getLocation();
+        	loc.getBlock().setType(Material.TORCH);
+        	
+        }
 
 }
 

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.config.Configuration;
 
 import TechGuard.x1337x.Archers.Arrow.EnumBowMaterial;
 
@@ -20,7 +21,10 @@ import TechGuard.x1337x.Archers.Arrow.EnumBowMaterial;
  */
 public class Properties {
 	public static HashMap<Short,ArrayList<ItemStack>> ArrowAmmo = new HashMap<Short,ArrayList<ItemStack>>();
+	public static double DAMAGE,SPEED;
+	
 	private static String dir = "plugins/Archers/";
+	private static File ArrowFile;
 	private static File ConfigFile;
 
 	public static void reload(){
@@ -28,18 +32,21 @@ public class Properties {
 	}
 
 	private static void load(){
-		ConfigFile = new File(dir + "config.ammo");
+		ArrowFile = new File(dir + "arrow.ammo");
+		ConfigFile = new File(dir + "config.yml");
 		checkForConfig();
+		checkForArrow();
 
-		loadConfig();
+		loadArrow();
+		loadConfig(new Configuration(ConfigFile));
 	}
 
-	private static void checkForConfig(){
+	private static void checkForArrow(){
 		try{
-			if(!ConfigFile.exists()){
-				ConfigFile.getParentFile().mkdirs();
-				ConfigFile.createNewFile();
-		        BufferedWriter out = new BufferedWriter(new FileWriter(ConfigFile));
+			if(!ArrowFile.exists()){
+				ArrowFile.getParentFile().mkdirs();
+				ArrowFile.createNewFile();
+		        BufferedWriter out = new BufferedWriter(new FileWriter(ArrowFile));
 
 		        out.write("#The right order:"); out.newLine();
 		        out.write("#  ARROW NAME:ITEM ID,AMOUNT:NEW ITEM ID, AMOUNT, etc. etc."); out.newLine();
@@ -85,20 +92,40 @@ public class Properties {
 		        out.write("#TP Arrow");out.newLine();
 		        out.write("Tp:287,1:262,1");out.newLine();
 		        out.write(""); out.newLine();
-		        out.write("Fly arrow");out.newLine();
+		        out.write("#Fly arrow");out.newLine();
 		        out.write("Fly:288,5:262,1");
 		        out.write(""); out.newLine();
-		        
+		        out.newLine();
+		        out.write("#Torch arrow");out.newLine();
+		        out.write("Torch:50:1:262,1");out.newLine();
 		        out.close();
 			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
-
-	private static void loadConfig(){
+	
+	private static void checkForConfig(){
 		try{
-		    BufferedReader br = new BufferedReader(new InputStreamReader(new DataInputStream(new FileInputStream(ConfigFile))));
+			if(!ConfigFile.exists()){
+				ConfigFile.getParentFile().mkdirs();
+				ConfigFile.createNewFile();
+				Configuration config = new Configuration(ConfigFile);
+				
+				String tag = "Global.";
+				config.setProperty(tag + "Normal-Arrow-Damage", 4);
+				config.setProperty(tag + "Normal-Arrow-Speed", 1);
+				
+				config.save();
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
+	private static void loadArrow(){
+		try{
+		    BufferedReader br = new BufferedReader(new InputStreamReader(new DataInputStream(new FileInputStream(ArrowFile))));
 		    String strLine;
 		    while ((strLine = br.readLine()) != null){
 		    	if(strLine.startsWith("#") || strLine.startsWith(" ") || !strLine.contains(":")){
@@ -114,6 +141,18 @@ public class Properties {
 		    	ArrowAmmo.put(EnumBowMaterial.fromName(split[0]).getDataValue(), list);
 		    }
 		    br.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	private static void loadConfig(Configuration config){
+		try{
+			config.load();
+			
+			String tag = "Global.";
+			DAMAGE = config.getDouble(tag + "Normal-Arrow-Damage", 4);
+			SPEED = config.getDouble(tag + "Normal-Arrow-Speed", 1);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
