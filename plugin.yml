@@ -1,0 +1,11 @@
+name: Archers
+main: TechGuard.x1337x.Archers.Archers
+version: 1.0
+description: Advanced Archers only!
+authors:
+  - TechGuard
+  - x1337x
+commands:
+  arrow:
+     description: Display a list of arrows
+     usage: /<command> [arrowname]
