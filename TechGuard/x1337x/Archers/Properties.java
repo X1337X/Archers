@@ -92,10 +92,12 @@ public class Properties {
 		        out.write("#TP Arrow");out.newLine();
 		        out.write("Tp:287,1:262,1");out.newLine();
 		        out.write(""); out.newLine();
-		        out.write("Fly arrow");out.newLine();
+		        out.write("#Fly arrow");out.newLine();
 		        out.write("Fly:288,5:262,1");
 		        out.write(""); out.newLine();
-		        
+		        out.newLine();
+		        out.write("#Torch arrow");out.newLine();
+		        out.write("Torch:50:1:262,1");out.newLine();
 		        out.close();
 			}
 		}catch(Exception e){

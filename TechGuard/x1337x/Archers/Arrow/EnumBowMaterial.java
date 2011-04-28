@@ -17,7 +17,8 @@ public enum EnumBowMaterial{
     PIG(		"Pig",		0,		new Object[]{ Material.GRASS }),
     ZEUS(		"Zeus",		20,		new Object[]{ Material.DIAMOND_BLOCK }),
 	TP(			"Tp",		0,		new Object[]{Material.WEB}),
-	FLY(		"Fly",		0,		new Object[]{Material.WOOL});
+	FLY(		"Fly",		0,		new Object[]{Material.WOOL}),
+	TORCH(      "Torch",    0,      new Object[]{Material.COAL_ORE});
 	private String name;
 	private short data;
 	private int damage;
