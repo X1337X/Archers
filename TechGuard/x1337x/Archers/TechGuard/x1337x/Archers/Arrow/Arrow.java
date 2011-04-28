@@ -19,7 +19,6 @@ import org.bukkit.craftbukkit.entity.CraftLivingEntity;
 import org.bukkit.entity.CreatureType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.material.Torch;
 import org.bukkit.util.Vector;
 /**
  * @author TechGuard
@@ -153,18 +152,12 @@ public class Arrow extends EntityArrow{
                 else if(material == EnumBowMaterial.TP){
                 	if(shooter.getBukkitEntity() instanceof Player){
                 		Player p = ((Player)shooter.getBukkitEntity());
-                		p.teleport(new Location(p.getWorld(),locX, locY, locZ, shooter.yaw, shooter.pitch));
+                		p.teleportTo(new Location(p.getWorld(),locX, locY, locZ, shooter.yaw, shooter.pitch));
                 	}
                 }
         else if(material == EnumBowMaterial.THRICE){
 			die();
 		}
-        else if(material == EnumBowMaterial.TORCH){
-        	Torch torch = new Torch();
-        	Location loc = getBukkitEntity().getLocation();
-        	loc.getBlock().setType(Material.TORCH);
-        	
-        }
 
 }
 
