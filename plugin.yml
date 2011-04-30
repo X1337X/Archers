@@ -11,4 +11,4 @@ commands:
      usage: /<command> [arrowname]
   archers:
      description: Shows the archers commands
-     usage: /<command> help
+     usage: /<command>
