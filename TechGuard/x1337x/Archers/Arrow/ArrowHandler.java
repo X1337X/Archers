@@ -11,7 +11,6 @@ import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.EntityDamageByProjectileEvent;
-import org.bukkit.util.Vector;
 
 import TechGuard.x1337x.Archers.Properties;
 /**
@@ -21,6 +20,7 @@ public class ArrowHandler {
 	public static short lastData = 0;
 
 	public static void onArrowCreate(Player p, Arrow arrow){
+		try{
 		org.bukkit.entity.Arrow  ea = ((org.bukkit.entity.Arrow)arrow.getBukkitEntity());
 		if(arrow.material == EnumBowMaterial.FIRE){
 			ea.setFireTicks(300);
@@ -29,11 +29,15 @@ public class ArrowHandler {
 			arrow.speed = (int)Properties.SPEED;
 		}
 		arrow.world.addEntity((EntityArrow)arrow);
+	}catch(Exception e){
+		
+	}
 	}
 
 	public static void onArrowDestroy(EntityDamageByProjectileEvent event){
+		try{
 		Arrow arrow = (Arrow)((CraftArrow)event.getProjectile()).getHandle();
-
+		
 		if(arrow.material == EnumBowMaterial.STANDARD) event.setDamage((int)Properties.DAMAGE);
 		else event.setDamage(arrow.material.getDamageValue());
 		arrow.destroy();
@@ -71,7 +75,11 @@ public class ArrowHandler {
 		}
         if(arrow.material == EnumBowMaterial.FLY){
         	org.bukkit.entity.LivingEntity entity = (org.bukkit.entity.LivingEntity)event.getEntity();
-			entity.teleportTo(new Location(entity.getWorld(), entity.getLocation().getX(),entity.getLocation().getY()+20, entity.getLocation().getZ()));
+			entity.teleport(new Location(entity.getWorld(), entity.getLocation().getX(),entity.getLocation().getY()+20, entity.getLocation().getZ()));
+		}
+		}catch(Exception e){
+			
 		}
 	}
+
 }

@@ -19,7 +19,6 @@ import org.bukkit.craftbukkit.entity.CraftLivingEntity;
 import org.bukkit.entity.CreatureType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.material.Torch;
 import org.bukkit.util.Vector;
 /**
  * @author TechGuard
@@ -160,10 +159,26 @@ public class Arrow extends EntityArrow{
 			die();
 		}
         else if(material == EnumBowMaterial.TORCH){
-        	Torch torch = new Torch();
         	Location loc = getBukkitEntity().getLocation();
         	loc.getBlock().setType(Material.TORCH);
         	
+        }
+        else if(material == EnumBowMaterial.WEB){
+        	Location loc = getBukkitEntity().getLocation();
+        	loc.getBlock().setType(Material.WEB);
+        	
+            Location loc1 = new Location(loc.getWorld(), loc.getX() + 1,loc.getY(),loc.getZ());
+            loc1.getBlock().setType(Material.WEB);
+            
+            Location loc2 = new Location(loc.getWorld(), loc.getX() - 1,loc.getY(),loc.getZ());
+            loc2.getBlock().setType(Material.WEB);
+            
+            Location loc3 = new Location(loc.getWorld(), loc.getX(),loc.getY(),loc.getZ() + 1);
+            loc3.getBlock().setType(Material.WEB);
+            
+            Location loc4 = new Location(loc.getWorld(), loc.getX(),loc.getY(),loc.getZ() - 1);
+            loc4.getBlock().setType(Material.WEB);
+            
         }
 
 }

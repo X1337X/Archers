@@ -5,30 +5,35 @@ import org.bukkit.Material;
  * @author TechGuard
  */
 public enum EnumBowMaterial{
-	STANDARD(	"Normal",	4,		new Object[]{ Material.LOG, Material.WOOD }),
-	ICE(		"Ice",		7,		new Object[]{ Material.SNOW, Material.ICE }),
-	FIRE(		"Fire",		5,		new Object[]{ Material.FIRE }),
-	TNT(		"TNT",		0,		new Object[]{ Material.TNT }),
-	THUNDER(	"Thunder",	0,		new Object[]{ Material.REDSTONE_ORE }),
-	MONSTER(	"Monster",	0,		new Object[]{ Material.MOB_SPAWNER }),
-    THRICE(		"Thrice",	3,		new Object[]{ Material.DISPENSER }),
-    ZOMBIE(		"Zombie",	0,		new Object[]{ Material.LAPIS_BLOCK }),
-    TREE(		"Tree",		0,		new Object[]{ Material.SAPLING }),
-    PIG(		"Pig",		0,		new Object[]{ Material.GRASS }),
-    ZEUS(		"Zeus",		20,		new Object[]{ Material.DIAMOND_BLOCK }),
-	TP(			"Tp",		0,		new Object[]{Material.WEB}),
-	FLY(		"Fly",		0,		new Object[]{Material.WOOL}),
-	TORCH(      "Torch",    0,      new Object[]{Material.COAL_ORE});
+	STANDARD(	"Normal",	4,		new Object[]{ Material.LOG, Material.WOOD },"The basic arrow"),
+	ICE(		"Ice",		7,		new Object[]{ Material.SNOW, Material.ICE },"Spreads snow around the arrow"),
+	FIRE(		"Fire",		5,		new Object[]{ Material.FIRE },"Sets fire to what it hits"),
+	TNT(		"TNT",		0,		new Object[]{ Material.TNT },"Explodes on impact"),
+	THUNDER(	"Thunder",	0,		new Object[]{ Material.REDSTONE_ORE },"Makes thunder strike on impact"),
+	MONSTER(	"Monster",	0,		new Object[]{ Material.MOB_SPAWNER },"Spawns a random mob on impact"),
+    THRICE(		"Thrice",	3,		new Object[]{ Material.DISPENSER },"Shoots 3 arrows instead of one"),
+    ZOMBIE(		"Zombie",	0,		new Object[]{ Material.LAPIS_BLOCK },"Morphs giants and zombie beetween each other"),
+    TREE(		"Tree",		0,		new Object[]{ Material.SAPLING },"Spawns a tree where it lands"),
+    PIG(		"Pig",		0,		new Object[]{ Material.GRASS },"Morps pig and zombie pigman beetween each other"),
+    ZEUS(		"Zeus",		20,		new Object[]{ Material.DIAMOND_BLOCK },"Makes fire lightning and tnt on impact"),
+	TP(			"Tp",		0,		new Object[]{ Material.WEB},"Tps you to where it lands"),
+	FLY(		"Fly",		0,		new Object[]{ Material.WOOL},"Hit a mob (including players) and they go 20 block up"),
+	TORCH(      "Torch",    0,      new Object[]{ Material.COAL_ORE},"Spawns a single torch where it lands"),
+	WEB  (      "Web",      0,      new Object[]{ Material.IRON_ORE},"Makes a square of 4 webs where it lands");
+	
+	
 	private String name;
+	private String description;
 	private short data;
 	private int damage;
 	private Object[] activate;
 
-	EnumBowMaterial(String name, int damage, Object[] activate){
+	EnumBowMaterial(String name, int damage, Object[] activate,String description){
 		this.name = name;
 		this.data = ArrowHandler.lastData++;
 		this.damage = damage;
 		this.activate = activate;
+		this.description = description;
 	}
 
 	public String getName(){
@@ -45,6 +50,9 @@ public enum EnumBowMaterial{
 
 	public Object[] getBlocks(){
 		return activate;
+	}
+	public String getDescription(){
+		return description;
 	}
 
 	public static EnumBowMaterial fromData(short data){

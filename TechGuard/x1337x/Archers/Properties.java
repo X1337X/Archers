@@ -98,6 +98,9 @@ public class Properties {
 		        out.newLine();
 		        out.write("#Torch arrow");out.newLine();
 		        out.write("Torch:50:1:262,1");out.newLine();
+		        out.write("#web arrow");out.newLine();
+		        out.write("Web:30,4:262,1");
+		        out.newLine();
 		        out.close();
 			}
 		}catch(Exception e){

@@ -35,6 +35,11 @@ public class ArrowCommand implements CommandExecutor {
 			
 			if(arrow == null){
 				p.sendMessage(ChatColor.RED+"There is no Arrow matching that name.");
+				String String1 = "";
+				for(EnumBowMaterial bow : EnumBowMaterial.values()){
+					String1 += ChatColor.YELLOW+bow.getName()+ChatColor.WHITE+", ";
+		       	}
+				p.sendMessage(String1.substring(0, String1.length()-4));
 				return false;
 			}
 			p.sendMessage(ChatColor.DARK_GREEN+"To use a "+ChatColor.YELLOW+arrow.getName()+" Arrow"+ChatColor.DARK_GREEN+" it Costs:");
@@ -48,7 +53,12 @@ public class ArrowCommand implements CommandExecutor {
 			for(Object object : arrow.getBlocks()){
 				String1 += ChatColor.YELLOW+fix(((Material)object).toString())+ChatColor.WHITE+", ";
 			}
+			p.sendMessage(ChatColor.RED + "-----------------------");
+			String string = arrow.getDescription();
+		
 			p.sendMessage(String1.substring(0, String1.length()-4));
+			p.sendMessage(ChatColor.RED + "----------------------");
+			p.sendMessage(ChatColor.YELLOW + string);
 		}
 		return true;
 	}
