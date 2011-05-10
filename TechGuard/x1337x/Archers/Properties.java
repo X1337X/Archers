@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.bukkit.block.Sign;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.config.Configuration;
 
@@ -99,7 +100,13 @@ public class Properties {
 		        out.write("#Torch arrow");out.newLine();
 		        out.write("Torch:50:1:262,1");out.newLine();
 		        out.write("#web arrow");out.newLine();
-		        out.write("Web:30,4:262,1");
+		        out.write("Web:30,4:262,1");out.newLine();
+		        out.write("#Steal arrow");out.newLine();
+		        out.write("Steal:287,1:262,1");out.newLine();
+		        out.write("#Sniper arrow");out.newLine();
+		        out.write("Sniper:348,1:262,2");
+		      
+		        
 		        out.newLine();
 		        out.close();
 			}

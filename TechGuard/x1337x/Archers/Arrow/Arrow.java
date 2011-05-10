@@ -168,19 +168,103 @@ public class Arrow extends EntityArrow{
         	loc.getBlock().setType(Material.WEB);
         	
             Location loc1 = new Location(loc.getWorld(), loc.getX() + 1,loc.getY(),loc.getZ());
+            if(loc1.getBlock().getType() == Material.AIR){
             loc1.getBlock().setType(Material.WEB);
-            
+            }
             Location loc2 = new Location(loc.getWorld(), loc.getX() - 1,loc.getY(),loc.getZ());
+            if(loc2.getBlock().getType() == Material.AIR){
             loc2.getBlock().setType(Material.WEB);
-            
+            }
             Location loc3 = new Location(loc.getWorld(), loc.getX(),loc.getY(),loc.getZ() + 1);
+            if(loc3.getBlock().getType() == Material.AIR){
             loc3.getBlock().setType(Material.WEB);
-            
+            }
             Location loc4 = new Location(loc.getWorld(), loc.getX(),loc.getY(),loc.getZ() - 1);
+            if(loc4.getBlock().getType() == Material.AIR){
             loc4.getBlock().setType(Material.WEB);
-            
+            }
         }
-
+	/*	if(material == EnumBowMaterial.NUKE){
+			//tnt one start
+		    Location one = getBukkitEntity().getLocation();
+		    double onex = one.getX();
+		    double oney = one.getY();
+		    double onez = one.getZ();
+			net.minecraft.server.World oneworld = (net.minecraft.server.World) one.getWorld();
+			EntityTNTPrimed tnt = new EntityTNTPrimed(oneworld, onex,oney, onez);
+			tnt.a = 0;
+			world.addEntity(tnt);
+			tnt.f_();
+			//tnt one end
+			//tnt two start
+		    Location two = getBukkitEntity().getLocation();
+		    double twox = two.getX();
+		    double twoy = two.getY() - 1;
+		    double twoz = two.getZ();
+			net.minecraft.server.World twoworld = (net.minecraft.server.World) two.getWorld();
+			EntityTNTPrimed tnttwo = new EntityTNTPrimed(twoworld, twox,twoy, twoz);
+			tnttwo.a = 0;
+			world.addEntity(tnttwo);
+			tnttwo.f_();
+			//tnt two end
+			//tnt three start
+		    Location three = getBukkitEntity().getLocation();
+		    double threex = three.getX();
+		    double threey = three.getY() + 2;
+		    double threez = three.getZ();
+			net.minecraft.server.World threeworld = (net.minecraft.server.World) three.getWorld();
+			EntityTNTPrimed tntthree = new EntityTNTPrimed(threeworld, threex,threey, threez);
+			tntthree.a = 0;
+			world.addEntity(tntthree);
+			tntthree.f_();
+			//tnt three end
+			//tnt four start
+		    Location four = getBukkitEntity().getLocation();
+		    double fourx = four.getX() + 1;
+		    double foury = four.getY();
+		    double fourz = four.getZ();
+			net.minecraft.server.World fourworld = (net.minecraft.server.World) four.getWorld();
+			EntityTNTPrimed tntfour = new EntityTNTPrimed(fourworld, fourx,foury, fourz);
+			tntfour.a = 0;
+			world.addEntity(tntfour);
+			tntfour.f_();
+			//tnt four end
+			//tnt five start
+		    Location five = getBukkitEntity().getLocation();
+		    double fivex = five.getX() - 1;
+		    double fivey = five.getY();
+		    double fivez = five.getZ();
+			net.minecraft.server.World fiveworld = (net.minecraft.server.World) five.getWorld();
+			EntityTNTPrimed tntfive = new EntityTNTPrimed(fiveworld, fivex,fivey, fivez);
+			tntfive.a = 0;
+			world.addEntity(tntfive);
+			tntfive.f_();
+			//tnt five end
+			//tnt six start
+		    Location six = getBukkitEntity().getLocation();
+		    double sixx = six.getX();
+		    double sixy = six.getY();
+		    double sixz = six.getZ() + 1;
+			net.minecraft.server.World sixworld = (net.minecraft.server.World) six.getWorld();
+			EntityTNTPrimed tntsix = new EntityTNTPrimed(sixworld, sixx,sixy, sixz);
+			tntsix.a = 0;
+			world.addEntity(tntsix);
+			tntsix.f_();
+			//tnt six end
+			//tnt seven start
+		    Location seven = getBukkitEntity().getLocation();
+		    double sevenx = seven.getX();
+		    double seveny = seven.getY();
+		    double sevenz = seven.getZ() - 1;
+			net.minecraft.server.World sevenworld = (net.minecraft.server.World) seven.getWorld();
+			EntityTNTPrimed tntseven = new EntityTNTPrimed(sevenworld, sevenx,seveny, sevenz);
+			tntseven.a = 0;
+			world.addEntity(tntseven);
+			tntseven.f_();
+			//tnt seven end
+		}
+*/
+		
 }
 
 	public void b(EntityHuman entityhuman) {

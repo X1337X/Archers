@@ -19,7 +19,10 @@ public enum EnumBowMaterial{
 	TP(			"Tp",		0,		new Object[]{ Material.WEB},"Tps you to where it lands"),
 	FLY(		"Fly",		0,		new Object[]{ Material.WOOL},"Hit a mob (including players) and they go 20 block up"),
 	TORCH(      "Torch",    0,      new Object[]{ Material.COAL_ORE},"Spawns a single torch where it lands"),
-	WEB  (      "Web",      0,      new Object[]{ Material.IRON_ORE},"Makes a square of 4 webs where it lands");
+	WEB  (      "Web",      0,      new Object[]{ Material.IRON_ORE},"Makes a square of 4 webs where it lands"),
+	STEAL(      "Steal",    0,      new Object[]{ Material.CHEST},"Steals the hits player item in hand and throws it out"),
+	//NUKE(       "Nuke",     0,      new Object[]{ Material.OBSIDIAN},"10 tnt at once!"),
+	SNIPER(     "Sniper",   100,    new Object[]{ Material.DIAMOND_ORE},"One shot super fast arrow");
 	
 	
 	private String name;

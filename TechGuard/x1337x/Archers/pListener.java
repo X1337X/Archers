@@ -5,19 +5,20 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event.Result;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.player.PlayerListener;
-import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerItemHeldEvent;
+import org.bukkit.event.player.PlayerListener;
 import org.bukkit.inventory.ItemStack;
 
 import TechGuard.x1337x.Archers.Arrow.Arrow;
 import TechGuard.x1337x.Archers.Arrow.ArrowHandler;
 import TechGuard.x1337x.Archers.Arrow.EnumBowMaterial;
+import TechGuard.x1337x.Archers.Crafting.CraftHandler;
 /**
  * @author TechGuard
  */
 public class pListener extends PlayerListener{
-
+CraftHandler c = new CraftHandler();
 	public void onItemHeldChange(PlayerItemHeldEvent event){
 		Player p = event.getPlayer();
 		ItemStack item = p.getInventory().getContents()[event.getNewSlot()];
@@ -55,6 +56,11 @@ public class pListener extends PlayerListener{
 					item.setDurability(bm.getDataValue());
 					p.sendMessage(ChatColor.DARK_GREEN+"Changed Bow Material to "+ChatColor.YELLOW+bm.getName()+ChatColor.DARK_GREEN+".");
 				}
+			}
+		}
+		if(event.getAction() == Action.RIGHT_CLICK_BLOCK){
+			if(event.getClickedBlock().getType() == Material.WORKBENCH){
+				c.run(event.getPlayer(),new Archers());
 			}
 		}
 		if(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK){
