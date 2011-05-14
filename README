@@ -1,6 +1,6 @@
 Robin and Jack(aka TechGuard and 1337) are working on a plugin called: Archers. 
 Custom Arrows, with special abilities.
-Version = 0.1
+Version = 0.2
 Commands :
 /arrow
 /archers help
@@ -21,3 +21,4 @@ Zeus arrow
 Fly arrow
 Tp arrow
 Torch arrow
+Web arrow
