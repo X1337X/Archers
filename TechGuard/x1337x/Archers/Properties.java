@@ -10,11 +10,11 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.bukkit.block.Sign;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.config.Configuration;
 
 import TechGuard.x1337x.Archers.Arrow.EnumBowMaterial;
+import TechGuard.x1337x.Archers.Data.ArrowData;
 
 
 /**
@@ -22,9 +22,8 @@ import TechGuard.x1337x.Archers.Arrow.EnumBowMaterial;
  */
 public class Properties {
 	public static HashMap<Short,ArrayList<ItemStack>> ArrowAmmo = new HashMap<Short,ArrayList<ItemStack>>();
-	public static double DAMAGE,SPEED;
-	
-	private static String dir = "plugins/Archers/";
+	public static ArrowData a = new ArrowData();
+	public static String dir = "plugins/Archers/";
 	private static File ArrowFile;
 	private static File ConfigFile;
 
@@ -34,12 +33,12 @@ public class Properties {
 
 	private static void load(){
 		ArrowFile = new File(dir + "arrow.ammo");
-		ConfigFile = new File(dir + "config.yml");
+		ConfigFile = new File(dir + "config.txt");
 		checkForConfig();
 		checkForArrow();
 
 		loadArrow();
-		loadConfig(new Configuration(ConfigFile));
+	//	loadConfig(new Configuration(ConfigFile));
 	}
 
 	private static void checkForArrow(){
@@ -120,13 +119,54 @@ public class Properties {
 			if(!ConfigFile.exists()){
 				ConfigFile.getParentFile().mkdirs();
 				ConfigFile.createNewFile();
-				Configuration config = new Configuration(ConfigFile);
+				BufferedWriter b = new BufferedWriter(new FileWriter(ConfigFile));
+				b.write("#usage is arrowname:damage:speed");
+				b.newLine();
+				b.write("#Do not change the arrowname");
+				b.newLine();
+				b.write("#lines starting with a # will be ignored");
+				b.newLine();
+				b.write("#example making tnt move 20 blocks a second and setting its damage to 20");
+				b.newLine();
+				b.write("#TNT:20:20");
+				b.newLine();
+				b.write("#------------------------------------------------------------------------");
+				b.newLine();
+				b.write("Normal:4:1");
+				b.newLine();
+				b.write("Ice:7:1");
+				b.newLine();
+				b.write("Fire:4:1");
+				b.newLine();
+				b.write("TNT:0:2");
+				b.newLine();
+				b.write("Thunder:0:1");
+				b.newLine();
+				b.write("Monster:0:1");
+				b.newLine();
+				b.write("Thrice:4:1");
+				b.newLine();
+				b.write("Zombie:0:1");
+				b.newLine();
+				b.write("Tree:0:1");
+				b.newLine();
+				b.write("Pig:0:1");
+				b.newLine();
+				b.write("Zeus:20:3");
+				b.newLine();
+				b.write("TP:0:1");
+				b.newLine();
+				b.write("Fly:0:1");
+				b.newLine();
+				b.write("Web:0:1");
+				b.newLine();
+				b.write("Steal:0:1");
+				b.newLine();
+				b.write("Sniper:100:70");
+				b.close();
 				
-				String tag = "Global.";
-				config.setProperty(tag + "Normal-Arrow-Damage", 4);
-				config.setProperty(tag + "Normal-Arrow-Speed", 1);
 				
-				config.save();
+				
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -156,15 +196,6 @@ public class Properties {
 		}
 	}
 	
-	private static void loadConfig(Configuration config){
-		try{
-			config.load();
-			
-			String tag = "Global.";
-			DAMAGE = config.getDouble(tag + "Normal-Arrow-Damage", 4);
-			SPEED = config.getDouble(tag + "Normal-Arrow-Speed", 1);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-	}
+	
+	
 }

@@ -59,6 +59,14 @@ public class ArrowCommand implements CommandExecutor {
 			p.sendMessage(String1.substring(0, String1.length()-4));
 			p.sendMessage(ChatColor.RED + "----------------------");
 			p.sendMessage(ChatColor.YELLOW + string);
+			p.sendMessage(ChatColor.RED+"-------------------------");
+			int damage = arrow.getDamageValue();
+			String dts = "Damage = " + damage;
+			String hdamage = "health Damage = " + arrow.getDamage(arrow.getName());
+			String speed = "Speed = " + arrow.getSpeed(arrow.getName());
+			p.sendMessage(dts);
+			p.sendMessage(hdamage);
+			p.sendMessage(speed);
 		}
 		return true;
 	}

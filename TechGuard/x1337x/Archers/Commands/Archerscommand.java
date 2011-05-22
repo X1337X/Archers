@@ -3,6 +3,7 @@ package TechGuard.x1337x.Archers.Commands;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 import TechGuard.x1337x.Archers.Archers;
@@ -20,7 +21,8 @@ public Archerscommand(Archers i){
 		// TODO Auto-generated method stub
 		cmd = arg3[0];
 
-		
+		ConsoleCommandSender s =  (ConsoleCommandSender) arg0;
+
 		if(cmd.equalsIgnoreCase("help") && Archers.Permissions.has(player, "archers.commandhelp")){
 			player.sendMessage("Archers Commands");
 		    player.sendMessage("/arrow [arrowname]");

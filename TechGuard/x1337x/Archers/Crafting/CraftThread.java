@@ -38,12 +38,13 @@ public class CraftThread implements Runnable {
 			try {
 				containerBench = (ContainerWorkbench) entityPlayer.activeContainer;
 			} catch (Exception ex) {
+				ex.printStackTrace();
 				kill();
 				return;
 			}
 			ItemStack Current = (ItemStack) containerBench.d.get(0);
 	
-					//craftPlayer.sendMessage("Something was crafted");
+					craftPlayer.sendMessage("Something was crafted");
 					int ingredient = Current.id;
 				if(ingredient == Material.BOW.getId()){
 					Player p = (Player) entityPlayer;

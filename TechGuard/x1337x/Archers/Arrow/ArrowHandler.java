@@ -11,14 +11,15 @@ import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.EntityDamageByProjectileEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import TechGuard.x1337x.Archers.Properties;
+import TechGuard.x1337x.Archers.Archers;
+import TechGuard.x1337x.Archers.Data.ArrowData;
 /**
  * @author TechGuard
  */
 public class ArrowHandler {
+	public static ArrowData a = new ArrowData();
 	public static short lastData = 0;
 
 	public static void onArrowCreate(Player p, Arrow arrow){
@@ -27,12 +28,7 @@ public class ArrowHandler {
 		if(arrow.material == EnumBowMaterial.FIRE){
 			ea.setFireTicks(300);
 		}
-		if(arrow.material == EnumBowMaterial.STANDARD){
-			arrow.speed = (int)Properties.SPEED;
-		}
-		if(arrow.material == EnumBowMaterial.SNIPER){
-			arrow.speed = 70;
-		}
+		arrow.speed = Archers.getSpeed(arrow.material.getName());
 		arrow.world.addEntity((EntityArrow)arrow);
 	}catch(Exception e){
 		
@@ -43,8 +39,7 @@ public class ArrowHandler {
 		try{
 		Arrow arrow = (Arrow)((CraftArrow)event.getProjectile()).getHandle();
 		
-		if(arrow.material == EnumBowMaterial.STANDARD) event.setDamage((int)Properties.DAMAGE);
-		else event.setDamage(arrow.material.getDamageValue());
+		event.setDamage(Archers.getDamage(arrow.material.getName()));
 		arrow.destroy();
 
 		if(arrow.material == EnumBowMaterial.FIRE){
@@ -83,15 +78,19 @@ public class ArrowHandler {
 			entity.teleport(new Location(entity.getWorld(), entity.getLocation().getX(),entity.getLocation().getY()+20, entity.getLocation().getZ()));
 		}
         if(arrow.material == EnumBowMaterial.STEAL){
-        	if(event.getEntity() instanceof Player){
-        		System.out.println("87");
+        	if(event.getEntity() instanceof Player && event.getDamager() instanceof Player){
+        		
         		Player p = (Player) event.getEntity();
         		ItemStack iih = p.getItemInHand();
-        		Location loc = p.getLocation();        	
+        		Location loc = p.getLocation(); 
+        		
         		Location locnew = new Location(loc.getWorld(),loc.getX() + 10,loc.getY()+ 10,loc.getBlockZ());
+        		if(iih != null){
         		p.getInventory().remove(iih);
-        		loc.getWorld().dropItemNaturally(locnew, iih);
-        		System.out.println("done");
+        		
+        		Player player = (Player) event.getDamager();
+        		player.getInventory().addItem(iih);
+        		}
         		}
         	
         }

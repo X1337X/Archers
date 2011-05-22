@@ -1,5 +1,8 @@
 package TechGuard.x1337x.Archers;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,6 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import TechGuard.x1337x.Archers.Commands.Archerscommand;
 import TechGuard.x1337x.Archers.Commands.ArrowCommand;
+import TechGuard.x1337x.Archers.Crafting.CraftHandler;
 
 import com.nijiko.permissions.PermissionHandler;
 import com.nijikokun.bukkit.Permissions.Permissions;
@@ -24,13 +28,12 @@ public class Archers extends JavaPlugin{
 	private pListener pL = new pListener();
 	public static PermissionHandler Permissions;
    public  int rb = 740;
-
+public CraftHandler c = new CraftHandler();
     public void onDisable() {
     	sM("Disabled!");
     }
 
     public void onEnable() {
-       
      	loadCommands();
     	registerEvents();
     	setupPermissions();
@@ -102,4 +105,61 @@ public class Archers extends JavaPlugin{
     	     
     	    }
     }
+    public static int getSpeed(String m){
+    	System.out.println("Getting speed for " + m);
+    	String file = Properties.dir + "config.txt";
+		File f = new File(file);
+		int speed = 0;
+		try {
+			Scanner scan = new Scanner(f);
+		//System.out.println(scan);
+	        while(scan.hasNextLine()){
+	        	String line1 = scan.nextLine();
+	        	String[] split = line1.split(":");
+	        	String name = split[0];
+	        	if(!name.startsWith("#")){
+	        	System.out.println("name = " + name);
+	        	System.out.println("arrow shot name = " + m);
+	        	if(m.equalsIgnoreCase(name)){
+	        		System.out.println("They MATCH :D :D");
+	        		System.out.println(split[0] + split[1] + split[3]);
+	        		System.out.println("speed for " + m + " = " + split[2]);
+	        		speed  = Integer.parseInt(split[2].toString());
+	        		return speed;
+	        	}
+	        }
+	        }
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+        return speed;
+	}
+	
+	public static int getDamage(String m){
+		String file = Properties.dir + "config.txt";
+		File f = new File(file);
+		int damage = 0;
+		try {
+			Scanner scan = new Scanner(f);
+			
+	        while(scan.hasNextLine()){
+	        	String line1 = scan.nextLine();
+	        	String[] split = line1.split(":");
+	        	String name = split[0];
+	        	if(name.equalsIgnoreCase(m)){
+	        		String[] line = split;
+	        		System.out.println(line[1]);
+	        		damage  = Integer.parseInt(line[1].toString());
+	        		
+	        	}
+	        }
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+        return damage;
+	}
 }

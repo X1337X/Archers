@@ -98,14 +98,18 @@ public class Arrow extends EntityArrow{
 						  break;
 					  }
 					  if ((id == 8) || (id == 9)) {
+						  if(world.getBlockAt(x,y,z).getType() == Material.AIR){
 						  world.getBlockAt(x, y, z).setTypeId(79);
+						  }
 						  break;
 				      }
 					  if (id != 0) {
 						  if (y == 127){
 							  break;
 						  }
+						  if(world.getBlockAt(x,y,z).getType() == Material.AIR){
 						  world.getBlockAt(x, y+1, z).setTypeId(78);
+						  }
 						  break;
 					  }
 				  }
@@ -135,7 +139,8 @@ public class Arrow extends EntityArrow{
                 else if(material == EnumBowMaterial.TREE){
                 	World world = getBukkitEntity().getWorld();
                 	Location loc = getBukkitEntity().getLocation();
-                   world.generateTree(loc, TreeType.TREE);
+                	TreeType[] type = { TreeType.BIG_TREE,TreeType.BIRCH,TreeType.REDWOOD,TreeType.TALL_REDWOOD};
+                   world.generateTree(loc, type[(new Random()).nextInt(4)]);
                    
                 }
                 else if(material == EnumBowMaterial.ZEUS){
