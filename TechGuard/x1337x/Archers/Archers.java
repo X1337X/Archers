@@ -27,6 +27,7 @@ public class Archers extends JavaPlugin
   private eListener eL = new eListener();
   private pListener pL = new pListener();
   private iListener iL = new iListener();
+  private Properties p = new Properties(this);
   public static PermissionHandler Permissions;
 
   boolean contrib = false;

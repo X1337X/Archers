@@ -15,6 +15,10 @@ import org.bukkit.util.config.Configuration;
 
 public class Properties
 {
+	static Archers plugin;
+	public Properties(Archers p){
+		this.plugin = p;
+	}
   public static HashMap<Short, ArrayList<ItemStack>> ArrowAmmo = new HashMap();
   public static double DAMAGE;
   public static double SPEED;
@@ -29,8 +33,8 @@ public class Properties
 
   private static void load() {
     ArrowFile = new File(dir + "arrow.ammo");
-    ConfigFile = new File(dir + "config.yml");
-    checkForConfig();
+    ConfigFile = new File(dir + "config.txt");
+    makeConfig();
     checkForArrow();
 
     loadArrow();
@@ -108,25 +112,67 @@ public class Properties
       e.printStackTrace();
     }
   }
+private static void makeConfig(){
+	try{
+		if(!ConfigFile.exists()){
+			ConfigFile.getParentFile().mkdirs();
+			ConfigFile.createNewFile();
+			BufferedWriter b = new BufferedWriter(new FileWriter(ConfigFile));
+			b.write("#usage is arrowname:damage:speed");
+			b.newLine();
+			b.write("#Do not change the arrowname");
+			b.newLine();
+			b.write("#lines starting with a # will be ignored");
+			b.newLine();
+			b.write("#example making tnt move 20 blocks a second and setting its damage to 20");
+			b.newLine();
+			b.write("#TNT:20:20");
+			b.newLine();
+			b.write("#------------------------------------------------------------------------");
+			b.newLine();
+			b.write("Normal:4:1");
+			b.newLine();
+			b.write("Ice:7:1");
+			b.newLine();
+			b.write("Fire:4:1");
+			b.newLine();
+			b.write("TNT:0:2");
+			b.newLine();
+			b.write("Thunder:0:1");
+			b.newLine();
+			b.write("Monster:0:1");
+			b.newLine();
+			b.write("Thrice:4:1");
+			b.newLine();
+			b.write("Zombie:0:1");
+			b.newLine();
+			b.write("Tree:0:1");
+			b.newLine();
+			b.write("Pig:0:1");
+			b.newLine();
+			b.write("Zeus:20:3");
+			b.newLine();
+			b.write("TP:0:1");
+			b.newLine();
+			b.write("Fly:0:1");
+			b.newLine();
+			b.write("Web:0:1");
+			b.newLine();
+			b.write("Steal:0:1");
+			b.newLine();
+			b.write("Sniper:100:70");
+			b.close();
 
-  private static void checkForConfig() {
-    try {
-      if (!ConfigFile.exists()) {
-        ConfigFile.getParentFile().mkdirs();
-        ConfigFile.createNewFile();
-        Configuration config = new Configuration(ConfigFile);
+           
 
-        String tag = "Global.";
-        config.setProperty(tag + "Normal-Arrow-Damage", Integer.valueOf(4));
-        config.setProperty(tag + "Normal-Arrow-Speed", Integer.valueOf(1));
+plugin.sM("Made config.txt sucessfully!");
+		}
+	}catch(Exception e){
+		e.printStackTrace();
+	}
 
-        config.save();
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
-
+}
+  
   private static void loadArrow() {
     try {
       BufferedReader br = new BufferedReader(new InputStreamReader(new DataInputStream(new FileInputStream(ArrowFile))));

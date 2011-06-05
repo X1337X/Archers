@@ -20,9 +20,9 @@ public void onInventoryCraft(InventoryCraftEvent event){
 	if(bow){
 	Player p = event.getPlayer();
 	if(!Archers.Permissions.has(p, "archers.craft")){
-	
-		event.setCancelled(true);
 		event.setResult(null);
+		event.setCancelled(true);
+		
 		p.sendMessage("You dont have permission to craft a bow!");
 	}
 	}
