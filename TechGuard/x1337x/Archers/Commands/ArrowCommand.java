@@ -38,8 +38,8 @@ public class ArrowCommand
 					
 			}
      	}
-		System.out.println(String0);
-		p.sendMessage(String0.substring(0, String0.length() - 4));
+		
+		p.sendMessage(String0.substring(0, String0.length()));
       p.sendMessage(ChatColor.DARK_GREEN + "To see more info about a arrow type: " + ChatColor.YELLOW + "/arrow [arrow name]");
     }
     else if (arg3.length >= 1) {
@@ -73,6 +73,8 @@ public class ArrowCommand
       p.sendMessage(String1.substring(0, String1.length() - 4));
       p.sendMessage(ChatColor.RED + "----------------------");
       p.sendMessage(ChatColor.YELLOW + string);
+      p.sendMessage(ChatColor.RED + "----------------------");
+      p.sendMessage(ChatColor.YELLOW + "Bows Item id : 261:"+arrow.getDataValue() );
     }
     return true;
   }

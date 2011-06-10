@@ -90,7 +90,7 @@ public class Properties
         out.write("Zeus:264,2:262,1"); out.newLine();
         out.write(""); out.newLine();
         out.write("#TP Arrow"); out.newLine();
-        out.write("Tp:287,1:262,1"); out.newLine();
+        out.write("Tp:287,1:262,2"); out.newLine();
         out.write(""); out.newLine();
         out.write("#Fly arrow"); out.newLine();
         out.write("Fly:288,5:262,1");
@@ -103,7 +103,12 @@ public class Properties
         out.write("#Steal arrow"); out.newLine();
         out.write("Steal:287,1:262,1"); out.newLine();
         out.write("#Sniper arrow"); out.newLine();
-        out.write("Sniper:348,1:262,2");
+        out.write("Sniper:348,1:262,2");out.newLine();
+        out.write("#Rocket arrow");out.newLine();
+        out.write("Rocket:46,3:262,5");out.newLine();
+        out.write("#Storm arrow");out.newLine();
+        out.write("Storm:326,1:262,1");
+       
 
         out.newLine();
         out.close();
@@ -161,6 +166,10 @@ private static void makeConfig(){
 			b.write("Steal:0:1");
 			b.newLine();
 			b.write("Sniper:100:70");
+			b.newLine();
+			b.write("Rocket:0:10");
+			b.newLine();
+			b.write("Storm:0:5");
 			b.close();
 
            

@@ -15,6 +15,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkitcontrib.BukkitContrib;
 
+import TechGuard.x1337x.Archers.Arrow.Arrow;
 import TechGuard.x1337x.Archers.Commands.Archerscommand;
 import TechGuard.x1337x.Archers.Commands.ArrowCommand;
 import TechGuard.x1337x.Archers.Crafting.iListener;
@@ -39,6 +40,7 @@ public class Archers extends JavaPlugin
 
   public void onEnable()
   {
+	  Arrow.getPlugin(this);
 	  getContrib();
   
 	  if(contrib){
@@ -115,7 +117,7 @@ public class Archers extends JavaPlugin
     Matcher versionMatch = Pattern.compile("git-Bukkit-([0-9]+).([0-9]+).([0-9]+)-[0-9]+-[0-9a-z]+-b([0-9]+)jnks.*").matcher(getServer().getVersion());
     if (versionMatch.matches()) {
       int versionNumber = Integer.parseInt(versionMatch.group(4));
-      if (versionNumber < this.rb) {
+      if (versionNumber != this.rb) {
         sM("Bukkit version is not the recommended build");
       }
       else
@@ -138,7 +140,7 @@ public class Archers extends JavaPlugin
 	        	String name = split[0];
 	        	if(!name.startsWith("#")){
 	        	if(m.equalsIgnoreCase(name)){
-	        		speed  = Integer.parseInt(split[1].toString());
+	        		speed  = Integer.parseInt(split[2].toString());
 	        		return speed;
 	        	}
 	        }
@@ -167,7 +169,7 @@ public class Archers extends JavaPlugin
 		        	if(m.equalsIgnoreCase(name)){
 		        	
 		        		
-		        		damage  = Integer.parseInt(split[2].toString());
+		        		damage  = Integer.parseInt(split[1].toString());
 		        		return damage;
 		        	}
 		        }

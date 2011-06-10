@@ -1,31 +1,39 @@
 package TechGuard.x1337x.Archers.Arrow;
 
 import java.util.Random;
+
 import net.minecraft.server.EntityArrow;
 import net.minecraft.server.EntityHuman;
 import net.minecraft.server.EntityLiving;
-import net.minecraft.server.EntityTNTPrimed;
-import net.minecraft.server.InventoryPlayer;
+import net.minecraft.server.EntityPlayer;
 import net.minecraft.server.Item;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.MathHelper;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.TreeType;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.craftbukkit.entity.CraftLivingEntity;
 import org.bukkit.entity.CreatureType;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.util.Vector;
+
+import TechGuard.x1337x.Archers.Archers;
 
 public class Arrow extends EntityArrow
 {
+	static Archers a;
+	
   public EnumBowMaterial material;
   public int speed = 0;
-
+public static void getPlugin(Archers p){
+	a = p;
+}
   private int moving = 0;
   private double firstY = 123.0D;
 
@@ -75,6 +83,23 @@ public class Arrow extends EntityArrow
   }
 
   public void destroy() {
+	  if(this.shooter instanceof EntityPlayer){
+	  EntityPlayer p = (EntityPlayer) this.shooter;
+	  Player player = (Player) p.getBukkitEntity();
+	  Location loca = getBukkitEntity().getLocation();
+	   loca.setY(loca.getY() - 1);
+	   Location newlock = loca;
+	   BlockBreakEvent e = new BlockBreakEvent(newlock.getBlock(), player);
+	   BlockBreakEvent ev = new BlockBreakEvent(loca.getBlock(),player);
+
+	   
+     
+     
+	   a.getServer().getPluginManager().callEvent(e);
+	   a.getServer().getPluginManager().callEvent(ev);
+      
+	
+	  if(!e.isCancelled() && !ev.isCancelled()){
     if (this.material == EnumBowMaterial.ICE) {
       int radius = 3;
       int radiusSq = (int)Math.pow(radius, 2.0D);
@@ -117,11 +142,17 @@ public class Arrow extends EntityArrow
       world.getBlockAt((int)this.locX, (int)this.locY, (int)this.locZ).setType(Material.FIRE);
     }
     else if (this.material == EnumBowMaterial.TNT) {
-      EntityTNTPrimed tnt = new EntityTNTPrimed(this.world, this.locX, this.locY, this.locZ);
+   	 
+	 int x = (int) this.locX;
+	 int y = (int) this.locY;
+	 int z = (int) this.locZ;
+	 World world = getBukkitEntity().getLocation().getWorld();
+	world.getBlockAt(x, y, z).setTypeId(46);
+	Block tnt = world.getBlockAt(x, y, z);
+	Block torch = world.getBlockAt(x + 1, y, z);
+	world.getBlockAt(x + 1, y, z).setTypeId(Material.REDSTONE_TORCH_ON.getId());
+	world.getBlockAt(x + 1, y, z).setTypeId(torch.getTypeId());
 
-      tnt.a = 0;
-      this.world.addEntity(tnt);
-      tnt.f_();
     }
     else if (this.material == EnumBowMaterial.THUNDER) {
       org.bukkit.World world = getBukkitEntity().getWorld();
@@ -142,16 +173,20 @@ public class Arrow extends EntityArrow
       org.bukkit.World worldf = loc.getWorld();
       worldf.strikeLightning(loc);
       loc.getBlock().setType(Material.FIRE);
-      EntityTNTPrimed tnt = new EntityTNTPrimed(this.world, this.locX, this.locY, this.locZ);
-
-      tnt.a = 0;
-      this.world.addEntity(tnt);
-      tnt.f_();
+      int x = (int) this.locX;
+ 	 int y = (int) this.locY;
+ 	 int z = (int) this.locZ;
+ 	 World world = getBukkitEntity().getLocation().getWorld();
+ 	world.getBlockAt(x, y, z).setTypeId(46);
+ 	Block tnt = world.getBlockAt(x, y, z);
+ 	Block torch = world.getBlockAt(x + 1, y, z);
+ 	world.getBlockAt(x + 1, y, z).setTypeId(Material.REDSTONE_TORCH_ON.getId());
+ 	
     }
     else if (this.material == EnumBowMaterial.TP) {
       if ((this.shooter.getBukkitEntity() instanceof Player)) {
-        Player p = (Player)this.shooter.getBukkitEntity();
-        p.teleport(new Location(p.getWorld(), this.locX, this.locY, this.locZ, this.shooter.yaw, this.shooter.pitch));
+        Player pl = (Player)this.shooter.getBukkitEntity();
+        pl.teleport(new Location(pl.getWorld(), this.locX, this.locY, this.locZ, this.shooter.yaw, this.shooter.pitch));
       }
     }
     else if (this.material == EnumBowMaterial.THRICE) {
@@ -159,7 +194,9 @@ public class Arrow extends EntityArrow
     }
     else if (this.material == EnumBowMaterial.TORCH) {
       Location loc = getBukkitEntity().getLocation();
+      if(loc.getBlock().getType() != Material.SIGN_POST || loc.getBlock().getType() != Material.SIGN || loc.getBlock().getType() != Material.RAILS || loc.getBlock().getType() != Material.POWERED_RAIL || loc.getBlock().getType() != Material.DETECTOR_RAIL){
       loc.getBlock().setType(Material.TORCH);
+      }
     }
     else if (this.material == EnumBowMaterial.WEB) {
       Location loc = getBukkitEntity().getLocation();
@@ -181,8 +218,29 @@ public class Arrow extends EntityArrow
       if (loc4.getBlock().getType() == Material.AIR)
         loc4.getBlock().setType(Material.WEB);
     }
-  }
+    else if(this.material == EnumBowMaterial.ROCKET){
+    	int x = (int) this.locX;
+   	 int y = (int) this.locY;
+   	 int z = (int) this.locZ;
+   	 World world = getBukkitEntity().getLocation().getWorld();
+   	world.getBlockAt(x, y, z).setTypeId(46);
+   	Block tnt = world.getBlockAt(x, y, z);
+   	world.getBlockAt(x + 1, y, z).setTypeId(Material.REDSTONE_TORCH_ON.getId());
 
+        
+    }
+    else if(this.material == EnumBowMaterial.STORM){
+    	Location loc = getBukkitEntity().getLocation();
+    	if(!loc.getWorld().hasStorm()){
+    	loc.getWorld().setStorm(true);
+    	}
+    	else if(loc.getWorld().hasStorm()){
+    		loc.getWorld().setStorm(false);
+    	}
+    }
+  }
+	  }
+  }
   public void b(EntityHuman entityhuman)
   {
     if ((!this.world.isStatic) && (this.shooter == entityhuman) && (this.moving == 2) && (entityhuman.inventory.canHold(new ItemStack(Item.ARROW, 1)))) {

@@ -55,8 +55,14 @@ public class pListener extends PlayerListener
           if (bm.getDataValue() == EnumBowMaterial.fromData(item.getDurability()).getDataValue()) {
             return;
           }
+          if(Archers.Permissions.has(p,"archers.change." + bm.getName().toLowerCase())){
+        	  p.sendMessage("Permission given");
           item.setDurability(bm.getDataValue());
           p.sendMessage(ChatColor.DARK_GREEN + "Changed Bow Material to " + ChatColor.YELLOW + bm.getName() + ChatColor.DARK_GREEN + ".");
+          }
+          else{
+        	  p.sendMessage("You dont have permission to change you bow to " + bm.getName());
+          }
         }
       }
     }
@@ -104,7 +110,15 @@ public class pListener extends PlayerListener
           }
           Arrow arrow1 = new Arrow(p.getWorld(), p, EnumBowMaterial.STANDARD);
           ArrowHandler.onArrowCreate(p, arrow1);
-        } else {
+        } 
+        if (material2 == EnumBowMaterial.ROCKET) {
+            for (int i = 0; i <= 3; i++) {
+              arrow = new Arrow(p.getWorld(), p, EnumBowMaterial.ROCKET, i);
+              ArrowHandler.onArrowCreate(p, arrow);
+            }
+            Arrow arrow1 = new Arrow(p.getWorld(), p, EnumBowMaterial.ROCKET);
+            ArrowHandler.onArrowCreate(p, arrow1);
+          }else {
           Arrow arrow2 = new Arrow(p.getWorld(), p, material2);
           ArrowHandler.onArrowCreate(p, arrow2);
         }

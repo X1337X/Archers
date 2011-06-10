@@ -1,11 +1,11 @@
 package TechGuard.x1337x.Archers.Arrow;
 
-import TechGuard.x1337x.Archers.Archers;
-import TechGuard.x1337x.Archers.Properties;
+import java.util.Random;
+
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.craftbukkit.entity.CraftArrow;
 import org.bukkit.entity.CreatureType;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Giant;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Pig;
@@ -14,7 +14,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.EntityDamageByProjectileEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
+
+import TechGuard.x1337x.Archers.Archers;
 
 public class ArrowHandler
 {
@@ -27,12 +28,7 @@ public class ArrowHandler
       if (arrow.material == EnumBowMaterial.FIRE) {
         ea.setFireTicks(300);
       }
-      if (arrow.material == EnumBowMaterial.STANDARD) {
-        arrow.speed = (int)Properties.SPEED;
-      }
-      if (arrow.material == EnumBowMaterial.SNIPER) {
-        arrow.speed = 70;
-      }
+  
       arrow.world.addEntity(arrow);
     }
     catch (Exception localException) {
@@ -43,7 +39,7 @@ public class ArrowHandler
     try {
       Arrow arrow = (Arrow)((CraftArrow)event.getProjectile()).getHandle();
 event.setDamage(Archers.getDamage(arrow.material.getName()));
-     System.out.println("Damage  = "  + Archers.getDamage(arrow.material.getName()));
+    
       if (arrow.material == EnumBowMaterial.FIRE) {
         event.getEntity().setFireTicks(80);
       }
@@ -78,17 +74,21 @@ event.setDamage(Archers.getDamage(arrow.material.getName()));
       if (arrow.material == EnumBowMaterial.FLY) {
         LivingEntity entity = (LivingEntity)event.getEntity();
         entity.teleport(new Location(entity.getWorld(), entity.getLocation().getX(), entity.getLocation().getY() + 20.0D, entity.getLocation().getZ()));
+  
       }
       if ((arrow.material == EnumBowMaterial.STEAL) && 
         ((event.getEntity() instanceof Player)))
       {
         Player p = (Player)event.getEntity();
-        ItemStack iih = p.getItemInHand();
+        Random r = new Random();
+        int ran = r.nextInt(17);
+        ItemStack iih = p.getInventory().getItem(ran);
         Location loc = p.getLocation();
         Location locnew = new Location(loc.getWorld(), loc.getX() + 10.0D, loc.getY() + 10.0D, loc.getBlockZ());
-        if (iih != null) {
+        if (iih != null || iih.getType() != Material.AIR) {
           p.getInventory().remove(iih);
-          loc.getWorld().dropItemNaturally(locnew, iih);
+         Player shooter = (Player) event.getDamager();
+         shooter.getInventory().addItem(iih);
         }
 
       }
