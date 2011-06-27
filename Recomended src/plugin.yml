@@ -1,0 +1,15 @@
+name: Archers
+main: TechGuard.x1337x.Archers.Archers
+version: 4.1
+description: Advanced Archers only!
+depend: [Permissions, BukkitContrib]
+authors:
+  - TechGuard
+  - x1337x
+commands:
+  arrow:
+     description: Display a list of arrows
+     usage: /<command> [arrowname]
+  archers:
+     description: Shows the archers commands
+     usage: /<command>
