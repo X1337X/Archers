@@ -24,6 +24,7 @@ public enum EnumBowMaterial
   ROCKET("Rocket",new Object[] {Material.OBSIDIAN},"Thrice arrow,with TNT!"),
   STORM("Storm",new Object[] {Material.SOUL_SAND},"Turns storms off and on");
 
+
   private String name;
   private String description;
   private short data;

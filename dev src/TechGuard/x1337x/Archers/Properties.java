@@ -107,7 +107,7 @@ public class Properties
         out.write("#Rocket arrow");out.newLine();
         out.write("Rocket:46,3:262,5");out.newLine();
         out.write("#Storm arrow");out.newLine();
-        out.write("Storm:326,1:262,1");
+        out.write("Storm:326,1:262,1");out.newLine();
        
 
         out.newLine();

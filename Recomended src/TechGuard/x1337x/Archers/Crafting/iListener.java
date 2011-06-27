@@ -16,6 +16,7 @@ public iListener(){
 @Override
 public void onInventoryCraft(InventoryCraftEvent event){
 	ItemStack result = event.getResult();
+	if(result != null){
 	boolean bow = result.getType() == Material.BOW;
 	if(bow){
 	Player p = event.getPlayer();
@@ -26,5 +27,6 @@ public void onInventoryCraft(InventoryCraftEvent event){
 		p.sendMessage("You dont have permission to craft a bow!");
 	}
 	}
+}
 }
 }

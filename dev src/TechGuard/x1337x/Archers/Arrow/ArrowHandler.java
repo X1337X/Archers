@@ -85,6 +85,7 @@ event.setDamage(Archers.getDamage(arrow.material.getName()));
         ItemStack iih = p.getInventory().getItem(ran);
         Location loc = p.getLocation();
         Location locnew = new Location(loc.getWorld(), loc.getX() + 10.0D, loc.getY() + 10.0D, loc.getBlockZ());
+  
         if (iih != null || iih.getType() != Material.AIR) {
           p.getInventory().remove(iih);
          Player shooter = (Player) event.getDamager();
@@ -92,7 +93,7 @@ event.setDamage(Archers.getDamage(arrow.material.getName()));
         }
 
       }
-
+   
       
     }
     catch (Exception localException)

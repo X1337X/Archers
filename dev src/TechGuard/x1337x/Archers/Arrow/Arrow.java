@@ -238,6 +238,7 @@ public static void getPlugin(Archers p){
     		loc.getWorld().setStorm(false);
     	}
     }
+ 
   }
 	  }
   }
@@ -248,5 +249,11 @@ public static void getPlugin(Archers p){
       entityhuman.receive(this, 1);
       die();
     }
+  }
+  public void removeTower(int x,int y,int z,int bottom,Location loc){
+	  while(y != bottom){
+		  loc.getWorld().getBlockAt(x, y, z).setType(Material.AIR);
+		  y--;
+	  }
   }
 }
