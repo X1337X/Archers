@@ -6,6 +6,7 @@ import net.minecraft.server.EntityArrow;
 import net.minecraft.server.EntityHuman;
 import net.minecraft.server.EntityLiving;
 import net.minecraft.server.EntityPlayer;
+import net.minecraft.server.EntityTNTPrimed;
 import net.minecraft.server.Item;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.MathHelper;
@@ -17,10 +18,14 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.craftbukkit.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.entity.CreatureType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.util.Vector;
 
 import TechGuard.x1337x.Archers.Archers;
@@ -143,15 +148,20 @@ public static void getPlugin(Archers p){
     }
     else if (this.material == EnumBowMaterial.TNT) {
    	 
-	 int x = (int) this.locX;
-	 int y = (int) this.locY;
-	 int z = (int) this.locZ;
-	 World world = getBukkitEntity().getLocation().getWorld();
-	world.getBlockAt(x, y, z).setTypeId(46);
-	Block tnt = world.getBlockAt(x, y, z);
-	Block torch = world.getBlockAt(x + 1, y, z);
-	world.getBlockAt(x + 1, y, z).setTypeId(Material.REDSTONE_TORCH_ON.getId());
-	world.getBlockAt(x + 1, y, z).setTypeId(torch.getTypeId());
+    	World world1 = getBukkitEntity().getLocation().getWorld();
+        net.minecraft.server.World world2 = ((CraftWorld) world1)
+                .getHandle();
+        EntityTNTPrimed ttnt = new EntityTNTPrimed(
+                (net.minecraft.server.World) world2, locX,
+                locY, locZ);
+        TNTPrimed Ex = (TNTPrimed) ttnt.getBukkitEntity();
+        ExplosionPrimeEvent event = new ExplosionPrimeEvent(Ex,20,false);
+        EntityExplodeEvent event2 = new EntityExplodeEvent(Ex, new Location(world1, locX, locY, locZ), null);
+        a.getServer().getPluginManager().callEvent(event);
+        a.getServer().getPluginManager().callEvent(event2);
+        if(!event.isCancelled() && !event2.isCancelled()){
+
+        world2.createExplosion(((CraftPlayer)shooter.getBukkitEntity()).getHandle(), locX, locY, locZ, 3, false);
 
     }
     else if (this.material == EnumBowMaterial.THUNDER) {
@@ -176,11 +186,20 @@ public static void getPlugin(Archers p){
       int x = (int) this.locX;
  	 int y = (int) this.locY;
  	 int z = (int) this.locZ;
- 	 World world = getBukkitEntity().getLocation().getWorld();
- 	world.getBlockAt(x, y, z).setTypeId(46);
- 	Block tnt = world.getBlockAt(x, y, z);
- 	Block torch = world.getBlockAt(x + 1, y, z);
- 	world.getBlockAt(x + 1, y, z).setTypeId(Material.REDSTONE_TORCH_ON.getId());
+ 	World world = getBukkitEntity().getLocation().getWorld();
+    net.minecraft.server.World world3 = ((CraftWorld) world)
+            .getHandle();
+    EntityTNTPrimed tnt = new EntityTNTPrimed(
+            (net.minecraft.server.World) world2, locX,
+            locY, locZ);
+    TNTPrimed Exp = (TNTPrimed) tnt.getBukkitEntity();
+    ExplosionPrimeEvent event3 = new ExplosionPrimeEvent(Ex,20,false);
+    EntityExplodeEvent event4 = new EntityExplodeEvent(Ex, new Location(world, locX, locY, locZ), null);
+    a.getServer().getPluginManager().callEvent(event);
+    a.getServer().getPluginManager().callEvent(event2);
+    if(!event.isCancelled() && !event2.isCancelled()){
+
+    world2.createExplosion(((CraftPlayer)shooter.getBukkitEntity()).getHandle(), locX, locY, locZ, 3, false);
  	
     }
     else if (this.material == EnumBowMaterial.TP) {
@@ -193,13 +212,13 @@ public static void getPlugin(Archers p){
       die();
     }
     else if (this.material == EnumBowMaterial.TORCH) {
-      Location loc = getBukkitEntity().getLocation();
+      Location locati = getBukkitEntity().getLocation();
       if(loc.getBlock().getType() != Material.SIGN_POST || loc.getBlock().getType() != Material.SIGN || loc.getBlock().getType() != Material.RAILS || loc.getBlock().getType() != Material.POWERED_RAIL || loc.getBlock().getType() != Material.DETECTOR_RAIL){
       loc.getBlock().setType(Material.TORCH);
       }
     }
     else if (this.material == EnumBowMaterial.WEB) {
-      Location loc = getBukkitEntity().getLocation();
+      Location locati = getBukkitEntity().getLocation();
       loc.getBlock().setType(Material.WEB);
 
       Location loc1 = new Location(loc.getWorld(), loc.getX() + 1.0D, loc.getY(), loc.getZ());
@@ -219,28 +238,38 @@ public static void getPlugin(Archers p){
         loc4.getBlock().setType(Material.WEB);
     }
     else if(this.material == EnumBowMaterial.ROCKET){
-    	int x = (int) this.locX;
-   	 int y = (int) this.locY;
-   	 int z = (int) this.locZ;
-   	 World world = getBukkitEntity().getLocation().getWorld();
-   	world.getBlockAt(x, y, z).setTypeId(46);
-   	Block tnt = world.getBlockAt(x, y, z);
-   	world.getBlockAt(x + 1, y, z).setTypeId(Material.REDSTONE_TORCH_ON.getId());
+    	World worldp = getBukkitEntity().getLocation().getWorld();
+        net.minecraft.server.World world4 = ((CraftWorld) world)
+                .getHandle();
+        EntityTNTPrimed rtnt = new EntityTNTPrimed(
+                (net.minecraft.server.World) world2, locX,
+                locY, locZ);
+        TNTPrimed Expl = (TNTPrimed) rtnt.getBukkitEntity();
+        ExplosionPrimeEvent event5 = new ExplosionPrimeEvent(Ex,20,false);
+        EntityExplodeEvent event6 = new EntityExplodeEvent(Ex, new Location(world, locX, locY, locZ), null);
+        a.getServer().getPluginManager().callEvent(event);
+        a.getServer().getPluginManager().callEvent(event2);
+        if(!event.isCancelled() && !event2.isCancelled()){
+
+        world2.createExplosion(((CraftPlayer)shooter.getBukkitEntity()).getHandle(), locX, locY, locZ, 3, false);
 
         
     }
     else if(this.material == EnumBowMaterial.STORM){
-    	Location loc = getBukkitEntity().getLocation();
-    	if(!loc.getWorld().hasStorm()){
-    	loc.getWorld().setStorm(true);
+    	Location locat = getBukkitEntity().getLocation();
+    	if(!locat.getWorld().hasStorm()){
+    	locat.getWorld().setStorm(true);
     	}
-    	else if(loc.getWorld().hasStorm()){
-    		loc.getWorld().setStorm(false);
+    	else if(locat.getWorld().hasStorm()){
+    		locat.getWorld().setStorm(false);
     	}
     }
  
-  }
+  }}
+    }
 	  }
+	  }
+	  
   }
   public void b(EntityHuman entityhuman)
   {
