@@ -25,6 +25,12 @@ public class ArrowHandler
 public ArrowHandler(Archers a){
 	plugin = a;
 }
+/*
+ * Called when a arrow is fired from a bow
+ @param Player p  - player who fired the arrow
+ @param Arrow arrow - the arrow that was fired
+ * 
+ */
   public static void onArrowCreate(Player p, Arrow arrow) {
     try {
       org.bukkit.entity.Arrow ea = (org.bukkit.entity.Arrow)arrow.getBukkitEntity();
@@ -38,7 +44,12 @@ public ArrowHandler(Archers a){
     catch (Exception localException) {
     }
   }
-
+/*
+ * Called when a arrow hits a entity
+ * @param EntityDamagedByEntityEvent
+ * 
+ * 
+ */
   public static void onArrowDestroy(final EntityDamageByProjectileEvent event) {
     try {
       Arrow arrow = (Arrow)((CraftArrow)event.getProjectile()).getHandle();
@@ -110,9 +121,11 @@ event.setDamage(Archers.getDamage(arrow.material.getName()));
     	  Entity t = event.getEntity();
     	  t.teleport(spawn);
       }
+      
     }
     catch (Exception localException)
     {
+    	//do nothing
     }
   }
 }

@@ -6,6 +6,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.entity.CraftArrow;
 import org.bukkit.entity.CreatureType;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Giant;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Pig;
@@ -20,7 +21,16 @@ import TechGuard.x1337x.Archers.Archers;
 public class ArrowHandler
 {
   public static short lastData = 0;
-
+  static Archers plugin;
+public ArrowHandler(Archers a){
+	plugin = a;
+}
+/*
+ * Called when a arrow is fired from a bow
+ @param Player p  - player who fired the arrow
+ @param Arrow arrow - the arrow that was fired
+ * 
+ */
   public static void onArrowCreate(Player p, Arrow arrow) {
     try {
       org.bukkit.entity.Arrow ea = (org.bukkit.entity.Arrow)arrow.getBukkitEntity();
@@ -34,8 +44,13 @@ public class ArrowHandler
     catch (Exception localException) {
     }
   }
-
-  public static void onArrowDestroy(EntityDamageByProjectileEvent event) {
+/*
+ * Called when a arrow hits a entity
+ * @param EntityDamagedByEntityEvent
+ * 
+ * 
+ */
+  public static void onArrowDestroy(final EntityDamageByProjectileEvent event) {
     try {
       Arrow arrow = (Arrow)((CraftArrow)event.getProjectile()).getHandle();
 event.setDamage(Archers.getDamage(arrow.material.getName()));
@@ -93,11 +108,24 @@ event.setDamage(Archers.getDamage(arrow.material.getName()));
         }
 
       }
-   
+   if(arrow.material == EnumBowMaterial.STONE){
+	 Archers.stone.add((Player) event.getEntity());
+	 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable(){
+		 public void run(){
+			 Archers.stone.remove(event.getEntity());
+		 }
+	 }, 100);
+   }
+      if(arrow.material == EnumBowMaterial.SPAWN){
+    	  Location spawn = event.getEntity().getLocation().getWorld().getSpawnLocation();
+    	  Entity t = event.getEntity();
+    	  t.teleport(spawn);
+      }
       
     }
     catch (Exception localException)
     {
+    	//do nothing
     }
   }
 }

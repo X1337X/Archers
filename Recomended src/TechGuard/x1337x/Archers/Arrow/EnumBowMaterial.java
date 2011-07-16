@@ -4,6 +4,7 @@ import org.bukkit.Material;
 
 public enum EnumBowMaterial
 {
+	//Holds all the information about the arrows
   STANDARD("Normal", new Object[] { Material.LOG, Material.WOOD }, "The basic arrow"), 
   ICE("Ice", new Object[] { Material.SNOW, Material.ICE }, "Spreads snow around the arrow"), 
   FIRE("Fire",new Object[] { Material.FIRE }, "Sets fire to what it hits"), 
@@ -22,7 +23,9 @@ public enum EnumBowMaterial
   STEAL("Steal", new Object[] { Material.CHEST }, "Steals the hits player item in hand and throws it out"), 
   SNIPER("Sniper",new Object[] { Material.DIAMOND_ORE }, "One shot super fast arrow"),
   ROCKET("Rocket",new Object[] {Material.OBSIDIAN},"Thrice arrow,with TNT!"),
-  STORM("Storm",new Object[] {Material.SOUL_SAND},"Turns storms off and on");
+  STORM("Storm",new Object[] {Material.SOUL_SAND},"Turns storms off and on"),
+  STONE("Stone",new Object[]{Material.STONE},"Stops the hit player from moving for 5 seconds"),
+  SPAWN("Spawn",new Object[]{Material.BED},"TPs the hit mob/player to the spawn");
 
 
   private String name;
@@ -30,9 +33,16 @@ public enum EnumBowMaterial
   private short data;
 
   private Object[] activate;
-
+/*
+ * Create a new arrow
+ * @param String name - name of the arrow, used for the /arrow command
+ * @param Object[] activate - the block/s hit to activate the bow
+ * @param String description - the arrows description, used for /arrow command
+ * 
+ */
   private EnumBowMaterial(String name, Object[] activate, String description) {
 	  this.name = name;
+	  //damage to set the bow to for that arrow type
     this.data = (ArrowHandler.lastData++);
     this.activate = activate;
     this.description = description; }
@@ -53,7 +63,11 @@ public enum EnumBowMaterial
   public String getDescription() {
     return this.description;
   }
-
+/*
+ * gets the EnumBowMaterial type from a data value
+ * @param short data - the data of the bow
+ * @return EnumBowMaterial arrow type
+ */
   public static EnumBowMaterial fromData(short data) {
     for (EnumBowMaterial material : values()) {
       if (material.data == data) {
@@ -62,7 +76,12 @@ public enum EnumBowMaterial
     }
     return STANDARD;
   }
-
+/*
+ * gets the EnumBowMaterial from a bow name
+ * @param the name of the arrow
+ * @return EnumBowMaterial arrow type
+ * 
+ */
   public static EnumBowMaterial fromName(String name) {
     for (EnumBowMaterial material : values()) {
       if (material.name.toLowerCase().startsWith(name.toLowerCase())) {
