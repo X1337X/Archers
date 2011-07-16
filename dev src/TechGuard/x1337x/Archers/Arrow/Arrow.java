@@ -37,7 +37,9 @@ public class Arrow extends EntityArrow
 	static Archers a;
 	
   public EnumBowMaterial material;
+
   public int speed = 0;
+
 public static void getPlugin(Archers p){
 	a = p;
 }
