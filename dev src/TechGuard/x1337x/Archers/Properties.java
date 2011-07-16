@@ -108,6 +108,10 @@ public class Properties
         out.write("Rocket:46,3:262,5");out.newLine();
         out.write("#Storm arrow");out.newLine();
         out.write("Storm:326,1:262,1");out.newLine();
+        out.write("#Stone arrow");out.newLine();
+        out.write("Stone:1,4:262,1");out.newLine();
+        out.write("#Spawn arrow");out.newLine();
+        out.write("Spawn:66,1:262,1");out.newLine();
        
 
         out.newLine();
@@ -169,7 +173,9 @@ private static void makeConfig(){
 			b.newLine();
 			b.write("Rocket:0:10");
 			b.newLine();
-			b.write("Storm:0:5");
+			b.write("Storm:0:5");b.newLine();
+			b.write("Stone:0:2");b.newLine();
+			b.write("Spawn:0:2");b.newLine();
 			b.close();
 
            

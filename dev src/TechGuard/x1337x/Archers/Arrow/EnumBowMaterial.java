@@ -22,7 +22,9 @@ public enum EnumBowMaterial
   STEAL("Steal", new Object[] { Material.CHEST }, "Steals the hits player item in hand and throws it out"), 
   SNIPER("Sniper",new Object[] { Material.DIAMOND_ORE }, "One shot super fast arrow"),
   ROCKET("Rocket",new Object[] {Material.OBSIDIAN},"Thrice arrow,with TNT!"),
-  STORM("Storm",new Object[] {Material.SOUL_SAND},"Turns storms off and on");
+  STORM("Storm",new Object[] {Material.SOUL_SAND},"Turns storms off and on"),
+  STONE("Stone",new Object[]{Material.STONE},"Stops the hit player from moving for 5 seconds"),
+  SPAWN("Spawn",new Object[]{Material.BED},"TPs the hit mob/player to the spawn");
 
 
   private String name;

@@ -3,17 +3,18 @@ package TechGuard.x1337x.Archers;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
+import org.bukkit.event.Event.Type;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkitcontrib.BukkitContrib;
 
 import TechGuard.x1337x.Archers.Arrow.Arrow;
 import TechGuard.x1337x.Archers.Commands.Archerscommand;
@@ -27,8 +28,9 @@ public class Archers extends JavaPlugin
 {
   private eListener eL = new eListener();
   private pListener pL = new pListener();
-  private iListener iL = new iListener();
+  private iListener iL;
   private Properties p = new Properties(this);
+  public static ArrayList<Player> stone = new ArrayList<Player>();
   public static PermissionHandler Permissions;
 
   boolean contrib = false;
@@ -45,9 +47,10 @@ public class Archers extends JavaPlugin
   
 	  if(contrib){
 	    	sM("Found BukkitContrib crafting permissions enabled!");
+	    	this.iL = new iListener();
 	    }
 	    else{
-	    	sM("Cant find BukkitContrib, disabling....");
+	    	sM("Cant find BukkitContrib, crafting permissions disabled!");
 	    }
 	  if(enable){
     loadCommands();
@@ -67,6 +70,7 @@ public class Archers extends JavaPlugin
     PluginManager pm = getServer().getPluginManager();
     pm.registerEvent(Event.Type.PLAYER_ITEM_HELD, this.pL, Event.Priority.Highest, this);
     pm.registerEvent(Event.Type.PLAYER_INTERACT, this.pL, Event.Priority.Highest, this);
+    pm.registerEvent(Type.PLAYER_MOVE, this.pL, Event.Priority.Highest, this);
     if(this.contrib){
     pm.registerEvent(Event.Type.CUSTOM_EVENT, this.iL, Event.Priority.Highest, this);
     }
@@ -182,16 +186,17 @@ public class Archers extends JavaPlugin
 	      return damage;
   }
   public void getContrib(){
-	  Plugin test = this.getServer().getPluginManager().getPlugin("BukkitContrib");
-    if(test != null){
+	  Plugin contrib = this.getServer().getPluginManager().getPlugin("BukkitContrib");
+    if(contrib != null){
     	this.contrib = true;
     	
     }
      else{
     	
     	this.contrib = false;
-    	this.getServer().getPluginManager().disablePlugin(this);
-    	this.enable = false;
      }
+  }
+  public static boolean IsStone(Player p){
+	  return stone.contains(p);
   }
 }

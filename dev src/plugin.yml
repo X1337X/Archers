@@ -1,8 +1,8 @@
 name: Archers
 main: TechGuard.x1337x.Archers.Archers
-version: 4.1
+version: b10
 description: Advanced Archers only!
-depend: [Permissions, BukkitContrib]
+depend: [Permissions]
 authors:
   - TechGuard
   - x1337x

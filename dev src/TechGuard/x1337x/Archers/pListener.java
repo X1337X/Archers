@@ -1,7 +1,5 @@
 package TechGuard.x1337x.Archers;
 
-import java.util.ArrayList;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -10,6 +8,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerListener;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 
 import TechGuard.x1337x.Archers.Arrow.Arrow;
@@ -31,7 +30,11 @@ public class pListener extends PlayerListener
     if (item.getType() == Material.BOW)
       p.sendMessage(ChatColor.DARK_GREEN + "Bow Material: " + ChatColor.YELLOW + EnumBowMaterial.fromData(item.getDurability()).getName());
   }
-
+  public void onPlayerMove(PlayerMoveEvent event){
+	  if(Archers.IsStone(event.getPlayer())){
+		  event.setCancelled(true);
+	  }
+  }
   public void onPlayerInteract(PlayerInteractEvent event)
   {
     EnumBowMaterial material;

@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.server.EntityArrow;
 import net.minecraft.server.EntityHuman;
+import net.minecraft.server.EntityItem;
 import net.minecraft.server.EntityLiving;
 import net.minecraft.server.EntityPlayer;
 import net.minecraft.server.EntityTNTPrimed;
@@ -15,8 +16,8 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.TreeType;
 import org.bukkit.World;
-import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.CraftWorld;
+import org.bukkit.craftbukkit.entity.CraftItem;
 import org.bukkit.craftbukkit.entity.CraftLivingEntity;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.entity.CreatureType;
@@ -26,6 +27,7 @@ import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
+import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.util.Vector;
 
 import TechGuard.x1337x.Archers.Archers;
@@ -45,6 +47,7 @@ public static void getPlugin(Archers p){
   public Arrow(org.bukkit.World world, LivingEntity entityliving, EnumBowMaterial material) {
     super(((CraftWorld)world).getHandle(), ((CraftLivingEntity)entityliving).getHandle());
     this.material = material;
+    
   }
 
   public Arrow(org.bukkit.World w, LivingEntity el, EnumBowMaterial material, int thrice) {
@@ -57,7 +60,7 @@ public static void getPlugin(Archers p){
     int int0 = 0;
     if (thrice == 0) int0 = -10;
     if (thrice == 1) int0 = 10;
-    setPositionRotation(entityliving.locX, entityliving.locY + entityliving.s(), entityliving.locZ, entityliving.yaw + int0, entityliving.pitch);
+    setPositionRotation(entityliving.locX, entityliving.locY + entityliving.t(), entityliving.locZ, entityliving.yaw + int0, entityliving.pitch);
     this.locX -= MathHelper.cos(this.yaw / 180.0F * 3.141593F) * 0.16F;
     this.locY -= 0.1000000014901161D;
     this.locZ -= MathHelper.sin(this.yaw / 180.0F * 3.141593F) * 0.16F;
@@ -69,8 +72,8 @@ public static void getPlugin(Archers p){
     a(this.motX, this.motY, this.motZ, 1.5F, 1.0F);
   }
 
-  public void o_() {
-    super.o_();
+  public void m_() {
+    super.m_();
 
     if (this.firstY == 123.0D) this.firstY = this.motY;
     if (this.speed > 0) {
@@ -271,18 +274,9 @@ public static void getPlugin(Archers p){
 	  }
 	  
   }
-  public void b(EntityHuman entityhuman)
-  {
-    if ((!this.world.isStatic) && (this.shooter == entityhuman) && (this.moving == 2) && (entityhuman.inventory.canHold(new ItemStack(Item.ARROW, 1)))) {
-      this.world.makeSound(this, "random.pop", 0.2F, ((this.random.nextFloat() - this.random.nextFloat()) * 0.7F + 1.0F) * 2.0F);
-      entityhuman.receive(this, 1);
-      die();
-    }
-  }
-  public void removeTower(int x,int y,int z,int bottom,Location loc){
-	  while(y != bottom){
-		  loc.getWorld().getBlockAt(x, y, z).setType(Material.AIR);
-		  y--;
+ 
+  public void b(EntityHuman entityhuman) {
+	 
+	    super.b(entityhuman);
 	  }
-  }
 }
