@@ -36,6 +36,12 @@ public class pListener extends PlayerListener
     if (item.getType() == Material.BOW)
       p.sendMessage(ChatColor.DARK_GREEN + "Bow Material: " + ChatColor.YELLOW + EnumBowMaterial.fromData(item.getDurability()).getName());
   }
+  /*
+   * Called when a player moves
+   * used for the stone arrow
+   * @see techguard.x1337x.archers.arrow.EnumBowMaterial#STONE
+   * @see org.bukkit.event.player.PlayerListener#onPlayerMove(org.bukkit.event.player.PlayerMoveEvent)
+   */
   public void onPlayerMove(PlayerMoveEvent event){
 	  if(Archers.IsStone(event.getPlayer())){
 		  event.setCancelled(true);
