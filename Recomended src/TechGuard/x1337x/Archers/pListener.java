@@ -19,7 +19,13 @@ import TechGuard.x1337x.Archers.Crafting.CraftHandler;
 public class pListener extends PlayerListener
 {
   CraftHandler c = new CraftHandler();
-
+/*
+ * called when the item in the players hand changes
+ * @param PlayerItemHeldChange
+ * 
+ * 
+ * @see org.bukkit.event.player.PlayerListener#onItemHeldChange(org.bukkit.event.player.PlayerItemHeldEvent)
+ */
   public void onItemHeldChange(PlayerItemHeldEvent event) { Player p = event.getPlayer();
     ItemStack item = p.getInventory().getContents()[event.getNewSlot()];
 

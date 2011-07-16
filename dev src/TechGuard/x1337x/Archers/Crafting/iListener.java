@@ -12,7 +12,11 @@ public class iListener extends InventoryListener {
 public iListener(){
 
 }
-
+/*
+ * 
+ * Called when somthing is crafted - needs bukkitcontrib
+ * 
+ */
 @Override
 public void onInventoryCraft(InventoryCraftEvent event){
 	ItemStack result = event.getResult();

@@ -43,13 +43,25 @@ public static void getPlugin(Archers p){
 }
   private int moving = 0;
   private double firstY = 123.0D;
-
+/*
+ * Makes a new normal arrow
+ * @param World world - world arrow was made in
+ * @param LivingEntity entityliving - LivingEntity that fired the arrow
+ * @param EnumBowMaterial material - material of the arrow shot
+ * 
+ */
   public Arrow(org.bukkit.World world, LivingEntity entityliving, EnumBowMaterial material) {
     super(((CraftWorld)world).getHandle(), ((CraftLivingEntity)entityliving).getHandle());
     this.material = material;
     
   }
-
+/*
+ * Make a new thrice arrow
+ * @param org.bukkit.World world - world arrow was shot in
+ * @param LivingEntity - entity that fired the arrow
+ * @param EnumBowMaterial - arrow type
+ * @param int thrice - Which thrice arrow it is -  effects the position of the arrow in the world
+ */
   public Arrow(org.bukkit.World w, LivingEntity el, EnumBowMaterial material, int thrice) {
     super(((CraftWorld)w).getHandle());
     this.material = material;
@@ -89,7 +101,10 @@ public static void getPlugin(Archers p){
       this.moving = 2;
     }
   }
-
+/*
+ * called when a arrow lands in a block
+ * 
+ */
   public void destroy() {
 	  if(this.shooter instanceof EntityPlayer){
 	  EntityPlayer p = (EntityPlayer) this.shooter;
@@ -274,7 +289,10 @@ public static void getPlugin(Archers p){
 	  }
 	  
   }
- 
+ /*
+  * called when a arrow its walked over by a player
+  * Best to let the real arrow class deal with this, less to update each minecraft update
+  */
   public void b(EntityHuman entityhuman) {
 	 
 	    super.b(entityhuman);
