@@ -153,7 +153,9 @@ public static void getPlugin(Archers p){
               if (y == 127) {
                 break;
               }
+              if(id == 0){
               world.getBlockAt(x, y + 1, z).setTypeId(78);
+              }
               break;
             }
           }
@@ -162,7 +164,9 @@ public static void getPlugin(Archers p){
     }
     else if (this.material == EnumBowMaterial.FIRE) {
       org.bukkit.World world = getBukkitEntity().getWorld();
+      if(world.getBlockAt((int)this.locX, (int)this.locY, (int)this.locZ).getTypeId() == 0){
       world.getBlockAt((int)this.locX, (int)this.locY, (int)this.locZ).setType(Material.FIRE);
+      }
     }
     else if (this.material == EnumBowMaterial.TNT) {
    	 
